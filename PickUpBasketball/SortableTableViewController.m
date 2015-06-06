@@ -23,6 +23,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+
 #import "SortableTableViewController.h"
 #import "XCMultiSortTableView.h"
 #import "Configs.h"
@@ -32,15 +33,17 @@
 
 @interface SortableTableViewController () <XCMultiTableViewDataSource>
 {
+    // Stat Array
     NSMutableArray *yourStats;
 }
 
 @end
 
+
 @implementation SortableTableViewController {
-    NSMutableArray *headData;
-    NSMutableArray *leftTableData;
-    NSMutableArray *rightTableData;
+    NSMutableArray *headData;         // headings
+    NSMutableArray *leftTableData;    // leftmost column
+    NSMutableArray *rightTableData;   // table data
 }
 
 - (void)viewDidLoad
@@ -51,12 +54,15 @@
     // initialize arrays
     yourStats = [[NSMutableArray alloc] init];
     
+    // Load parse data
     [self loadParse];
-    NSLog(@"Your Stats: %@",yourStats);
-    NSLog(@"Your Stats Count: %d",yourStats.count);
+    //NSLog(@"Your Stats: %@",yourStats);
+    //NSLog(@"Your Stats Count: %d",yourStats.count);
     
+    // Populate Table
     [self initData];
     
+    // Table Properties
     XCMultiTableView *tableView = [[XCMultiTableView alloc] initWithFrame:CGRectInset(self.view.bounds, 5.0f, 5.0f)];
     tableView.leftHeaderEnable = YES;
     tableView.datasource = self;
@@ -65,12 +71,16 @@
 }
 
 - (void)initData {
+    
+    // Header Titles
     headData = [NSMutableArray arrayWithCapacity:10];
     [headData addObject:@"One"];
     [headData addObject:@"Two"];
     [headData addObject:@"Three"];
     [headData addObject:@"Four"];
     [headData addObject:@"Five"];
+    
+    // Configure Leftmost Column
     leftTableData = [NSMutableArray arrayWithCapacity:10];
     NSMutableArray *one = [NSMutableArray arrayWithCapacity:10];
     for (int i = 0; i < 3; i++) {
@@ -84,7 +94,7 @@
     [leftTableData addObject:two];
     
     
-    
+    // Configure Table Data
     rightTableData = [NSMutableArray arrayWithCapacity:10];
     
     NSMutableArray *oneR = [NSMutableArray arrayWithCapacity:10];
@@ -132,6 +142,7 @@
 }
 
 - (void)loadParse {
+    // Query Parse Database
     if ([PFUser currentUser] != nil) {
         PFQuery *query = [PFQuery queryWithClassName:PF_GAME_CLASS_NAME];
         [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];

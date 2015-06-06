@@ -17,16 +17,10 @@
 
 - (void)awakeFromNib {
     
-    //if ([PFUser currentUser] != nil) {
-        
-        self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
-        self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuController"];
-       /*
-    } else {
-        self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];
-        self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuController"];
-    }
-    */
+    // Set Home and Menu Views
+    self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
+    self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuController"];
+
 }
 
 @end

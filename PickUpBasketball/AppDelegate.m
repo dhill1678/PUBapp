@@ -7,14 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "Configs.h"
+#import "Utilities.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
-
-#import "Configs.h"
-#import "Utilities.h"
 
 #import "ContactsVC.h"
 #import "ChatVC.h"
@@ -97,6 +96,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
+    // Handle Facebook Session
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
     
     // Logs 'install' and 'app activate' App Events.
