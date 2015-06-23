@@ -14,17 +14,16 @@
 
 
 
-#define     INVITE_FRIENDS_MESSAGE  @"Become A Pickup Legend! Track your Pickup Game Stats using the Pickup Stats app by AppMuumba. Download here: https://itunes.apple.com/us/artist/appmuumba/id871587578" // Invitation Message
+#define     INVITE_FRIENDS_MESSAGE  @"Become A Pickup Legend! Track your Pickup Game Stats using the Pickup Stats app by AppMuumba. Download here: https://itunes.apple.com/us/artist/appmuumba/id871587578"
 
-#define     PARSE_APP_ID @"XiWunV1TmMWeHYCkBT9dztgEdRSzhKjPzGvwUj0s"        // Parse ID
-#define     PARSE_CLIENT_KEY @"21TjbxCfi8V9ITUm476gZrn5uRxi99pcdtbFayFH"    // Parse Client Key
+#define     PARSE_APP_ID @"XiWunV1TmMWeHYCkBT9dztgEdRSzhKjPzGvwUj0s"        // changed
+#define     PARSE_CLIENT_KEY @"21TjbxCfi8V9ITUm476gZrn5uRxi99pcdtbFayFH"    // changed
+
+
 
 
 /*=========================================================================*/
 
-///////////////
-// User Info //
-///////////////
 
 #define		PF_INSTALLATION_CLASS_NAME			@"_Installation"		//	Class name
 #define		PF_INSTALLATION_OBJECTID			@"objectId"				//	String
@@ -53,11 +52,6 @@
 #define		PF_USER_SCHOOL                      @"school"				//	String
 #define		PF_USER_NICKNAME                    @"nickname"				//	String
 
-
-//////////////
-// Messages //
-//////////////
-
 #define		PF_CHAT_CLASS_NAME					@"Chat"					//	Class name
 #define		PF_CHAT_USER						@"user"					//	Pointer to User Class
 #define		PF_CHAT_ROOMID						@"roomId"				//	String
@@ -85,16 +79,14 @@
 #define		NOTIFICATION_USER_LOGGED_OUT		@"NCUserLoggedOut"
 
 
-////////////////
-// User Stats //
-////////////////
-
+// User Stats
 #define		PF_PRACTICE_CLASS_NAME				@"Practice"             //	Class name
 #define		PF_PRACTICE_USER					@"user"					//	Pointer to User Class
 #define		PF_PRACTICE_TYPE					@"type"                 //	String
 #define		PF_PRACTICE_ZONE					@"zone"                 //	String
 #define		PF_PRACTICE_MAKES					@"makes"                //	String
 #define		PF_PRACTICE_ATTEMPTS				@"attempts"             //	String
+//#define		PF_SHOTCHART_CREATEDAT				@"createdAt"			//	Date
 #define		PF_PRACTICE_CONSECUTIVE				@"consecutive"          //	String
 #define		PF_PRACTICE_COURTSTYLE				@"courtstyle"           //	String
 

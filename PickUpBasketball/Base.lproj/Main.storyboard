@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,7 +26,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417" y="1113"/>
+            <point key="canvasLocation" x="-395" y="1075"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5wy-0v-dul">
@@ -52,7 +52,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qpw-XL-WoL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="1113"/>
+            <point key="canvasLocation" x="291" y="1075"/>
         </scene>
         <!--Welcome-->
         <scene sceneID="lhq-tF-9i7">
@@ -929,7 +929,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuk-FR-t5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="1114"/>
+            <point key="canvasLocation" x="1070" y="1075"/>
         </scene>
         <!--WelcomeVC-->
         <scene sceneID="dYr-hO-JcC">
@@ -1839,7 +1839,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gda-kq-hhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1813" y="1113"/>
+            <point key="canvasLocation" x="1813" y="1075"/>
         </scene>
         <!--Consecutive Shots View Controller-->
         <scene sceneID="GTf-Jj-3QX">
@@ -2129,7 +2129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rv-Zu-ZtO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3361" y="1113"/>
+            <point key="canvasLocation" x="3359" y="1075"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="VOV-W6-58a">
@@ -2227,7 +2227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nt6-aM-6OC" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="1113"/>
+            <point key="canvasLocation" x="2597" y="1075"/>
         </scene>
         <!--Pickup Mode-->
         <scene sceneID="W3j-7x-Cpe">
@@ -3944,7 +3944,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lDM-F6-7sN"/>
-        <segue reference="kQ2-Ny-WT1"/>
+        <segue reference="biB-FV-Io6"/>
         <segue reference="l4D-zw-t21"/>
     </inferredMetricsTieBreakers>
 </document>

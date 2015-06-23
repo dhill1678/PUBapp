@@ -35,6 +35,10 @@
     self.title = @"Sign In"; // changed
     
     
+    self.navigationItem.hidesBackButton = YES;//change
+    
+
+    
     // Round the corners of the Logo
     _logoImage.layer.cornerRadius = 10;
     

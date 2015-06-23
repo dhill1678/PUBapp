@@ -23,12 +23,14 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-
 #import <UIKit/UIKit.h>
 
 #import "XCMultiSortTableView.h"
 
 @interface SortableTableViewController : UIViewController
+{
+    XCMultiTableView *tableView;
+}
 
 - (IBAction)filter:(id)sender;
 

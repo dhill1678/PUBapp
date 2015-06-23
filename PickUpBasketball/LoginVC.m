@@ -80,7 +80,10 @@
 			//[self dismissViewControllerAnimated:YES completion:nil];
             [self performSegueWithIdentifier: @"fromLogin" sender: self];
 		
-        } else [ProgressHUD showError:error.userInfo[@"error"]];
+        }
+        else{
+         [ProgressHUD showError:error.userInfo[@"error"]];   
+        }
 	}];
 }
 

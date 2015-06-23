@@ -474,6 +474,9 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 }
 
 - (CGFloat)accessContentTableViewCellWidth:(NSUInteger)column {
+    NSLog(@"responseContentTableCellWidth=%hhd",responseContentTableCellWidth);
+    
+    NSLog(@"responseContentTableCellWidth=%f",cellWidth);
     return responseContentTableCellWidth ? [datasource tableView:self contentTableCellWidth:column] : cellWidth;
 }
 

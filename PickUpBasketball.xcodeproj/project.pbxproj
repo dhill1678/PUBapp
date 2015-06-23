@@ -121,10 +121,6 @@
 		3C5474A41AAE5AAE007B541F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5474A21AAE5A9B007B541F /* AudioToolbox.framework */; };
 		3C5474A71AAE5B25007B541F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5474A51AAE5B10007B541F /* libsqlite3.dylib */; };
 		3C5474AA1AAE5B46007B541F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5474A81AAE5B34007B541F /* libz.dylib */; };
-		3C5474AF1AAE5C80007B541F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5474AB1AAE5C80007B541F /* FacebookSDK.framework */; };
-		3C5474B01AAE5C81007B541F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5474AC1AAE5C80007B541F /* Parse.framework */; };
-		3C5474B11AAE5C81007B541F /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5474AD1AAE5C80007B541F /* ParseFacebookUtils.framework */; };
-		3C5474B21AAE5C81007B541F /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5474AE1AAE5C80007B541F /* ParseUI.framework */; };
 		3C5474B41AAF6F34007B541F /* home.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C5474B31AAF6F34007B541F /* home.jpg */; };
 		3C5E704F1AD062F7006867FB /* logo_round.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C5E704E1AD062F7006867FB /* logo_round.png */; };
 		3C5E70511AD06869006867FB /* logo_text.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C5E70501AD06869006867FB /* logo_text.png */; };
@@ -148,7 +144,6 @@
 		3CACB50D1AAC11D800D64D09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CACB50B1AAC11D800D64D09 /* Main.storyboard */; };
 		3CACB50F1AAC11D800D64D09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CACB50E1AAC11D800D64D09 /* Images.xcassets */; };
 		3CACB5121AAC11D800D64D09 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CACB5101AAC11D800D64D09 /* LaunchScreen.xib */; };
-		3CACB51E1AAC11D800D64D09 /* PickUpBasketballTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CACB51D1AAC11D800D64D09 /* PickUpBasketballTests.m */; };
 		3CACB5311AAC161100D64D09 /* buttonbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CACB5301AAC161100D64D09 /* buttonbar.xcassets */; };
 		3CD04B571ADC36E200313E12 /* IQBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD04B3E1ADC36E200313E12 /* IQBarButtonItem.m */; };
 		3CD04B581ADC36E200313E12 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04B3F1ADC36E200313E12 /* IQKeyboardManager.bundle */; };
@@ -177,17 +172,12 @@
 		3CD04F741ADB7FB6001F8018 /* freethrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04F731ADB7FB6001F8018 /* freethrows.png */; };
 		3CD04F761ADB7FC5001F8018 /* heatcheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04F751ADB7FC5001F8018 /* heatcheck.png */; };
 		3CD04F781ADB7FD2001F8018 /* shotchart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04F771ADB7FD2001F8018 /* shotchart.png */; };
+		7E4E83401B391FB100AE1D9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4E833F1B391FB100AE1D9F /* FacebookSDK.framework */; };
+		7E4E83411B391FE400AE1D9F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B25A97E003C2B30 /* Parse.framework */; };
+		7EDC0B201B37FB070009BF38 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C91B25A992003C2B30 /* ParseUI.framework */; };
+		7EDC0B211B37FB070009BF38 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */; };
+		7EDC0B271B381DBB0009BF38 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDC0B261B381DBB0009BF38 /* Bolts.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3CACB5181AAC11D800D64D09 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3CACB4F61AAC11D700D64D09 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3CACB4FD1AAC11D700D64D09;
-			remoteInfo = PickUpBasketball;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3C0AFE4A1AD0E8F10078FA9B /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appicon.png; sourceTree = "<group>"; };
@@ -416,10 +406,6 @@
 		3C5474A21AAE5A9B007B541F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3C5474A51AAE5B10007B541F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3C5474A81AAE5B34007B541F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		3C5474AB1AAE5C80007B541F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../../../../../../Downloads/codecanyon-10316908-wazzup-ios-78-universal-chat-app-template-objc/WazzUp/FacebookSDK.framework"; sourceTree = "<group>"; };
-		3C5474AC1AAE5C80007B541F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../../Downloads/codecanyon-10316908-wazzup-ios-78-universal-chat-app-template-objc/WazzUp/Parse.framework"; sourceTree = "<group>"; };
-		3C5474AD1AAE5C80007B541F /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../../../../Downloads/codecanyon-10316908-wazzup-ios-78-universal-chat-app-template-objc/WazzUp/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
-		3C5474AE1AAE5C80007B541F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "../../../../../../Downloads/codecanyon-10316908-wazzup-ios-78-universal-chat-app-template-objc/WazzUp/ParseUI.framework"; sourceTree = "<group>"; };
 		3C5474B31AAF6F34007B541F /* home.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home.jpg; sourceTree = "<group>"; };
 		3C5E704E1AD062F7006867FB /* logo_round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_round.png; sourceTree = "<group>"; };
 		3C5E70501AD06869006867FB /* logo_text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_text.png; sourceTree = "<group>"; };
@@ -457,7 +443,6 @@
 		3CACB50C1AAC11D800D64D09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3CACB50E1AAC11D800D64D09 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3CACB5111AAC11D800D64D09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		3CACB5171AAC11D800D64D09 /* PickUpBasketballTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickUpBasketballTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CACB51C1AAC11D800D64D09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CACB51D1AAC11D800D64D09 /* PickUpBasketballTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickUpBasketballTests.m; sourceTree = "<group>"; };
 		3CACB5301AAC161100D64D09 /* buttonbar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = buttonbar.xcassets; sourceTree = "<group>"; };
@@ -506,6 +491,11 @@
 		3CD04F731ADB7FB6001F8018 /* freethrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freethrows.png; sourceTree = "<group>"; };
 		3CD04F751ADB7FC5001F8018 /* heatcheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heatcheck.png; sourceTree = "<group>"; };
 		3CD04F771ADB7FD2001F8018 /* shotchart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shotchart.png; sourceTree = "<group>"; };
+		7E4E833F1B391FB100AE1D9F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = pickupbasketball/Library/FacebookSDK.framework; sourceTree = "<group>"; };
+		7E87C5C51B25A97E003C2B30 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = pickupbasketball/Library/Parse.framework; sourceTree = "<group>"; };
+		7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = pickupbasketball/Library/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		7E87C5C91B25A992003C2B30 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = pickupbasketball/Library/ParseUI.framework; sourceTree = "<group>"; };
+		7EDC0B261B381DBB0009BF38 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = pickupbasketball/Library/Bolts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -513,30 +503,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E4E83411B391FE400AE1D9F /* Parse.framework in Frameworks */,
+				7E4E83401B391FB100AE1D9F /* FacebookSDK.framework in Frameworks */,
+				7EDC0B271B381DBB0009BF38 /* Bolts.framework in Frameworks */,
+				7EDC0B201B37FB070009BF38 /* ParseUI.framework in Frameworks */,
+				7EDC0B211B37FB070009BF38 /* ParseFacebookUtils.framework in Frameworks */,
 				3C5474AA1AAE5B46007B541F /* libz.dylib in Frameworks */,
 				3C5474A71AAE5B25007B541F /* libsqlite3.dylib in Frameworks */,
 				3C5474A41AAE5AAE007B541F /* AudioToolbox.framework in Frameworks */,
 				3C5474A11AAE5A7F007B541F /* CFNetwork.framework in Frameworks */,
-				3C5474B01AAE5C81007B541F /* Parse.framework in Frameworks */,
 				3C54749E1AAE5A5F007B541F /* CoreGraphics.framework in Frameworks */,
 				3C54749B1AAE5A40007B541F /* CoreLocation.framework in Frameworks */,
 				3C5474971AAE5889007B541F /* MobileCoreServices.framework in Frameworks */,
 				3C5474941AAE5865007B541F /* QuartzCore.framework in Frameworks */,
-				3C5474B21AAE5C81007B541F /* ParseUI.framework in Frameworks */,
 				3C5474911AAE583B007B541F /* Security.framework in Frameworks */,
 				3C54748E1AAE5818007B541F /* StoreKit.framework in Frameworks */,
 				3C54748B1AAE57E3007B541F /* SystemConfiguration.framework in Frameworks */,
 				3C5474881AAE578E007B541F /* Social.framework in Frameworks */,
 				3C5474861AAE576A007B541F /* iAd.framework in Frameworks */,
-				3C5474B11AAE5C81007B541F /* ParseFacebookUtils.framework in Frameworks */,
-				3C5474AF1AAE5C80007B541F /* FacebookSDK.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CACB5141AAC11D800D64D09 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,10 +686,6 @@
 		3C5473491AAE4E1E007B541F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3C5474AB1AAE5C80007B541F /* FacebookSDK.framework */,
-				3C5474AC1AAE5C80007B541F /* Parse.framework */,
-				3C5474AD1AAE5C80007B541F /* ParseFacebookUtils.framework */,
-				3C5474AE1AAE5C80007B541F /* ParseUI.framework */,
 				3C5474A81AAE5B34007B541F /* libz.dylib */,
 				3C5474A51AAE5B10007B541F /* libsqlite3.dylib */,
 				3C5474A21AAE5A9B007B541F /* AudioToolbox.framework */,
@@ -1065,6 +1045,11 @@
 		3CACB4F51AAC11D700D64D09 = {
 			isa = PBXGroup;
 			children = (
+				7E4E833F1B391FB100AE1D9F /* FacebookSDK.framework */,
+				7EDC0B261B381DBB0009BF38 /* Bolts.framework */,
+				7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */,
+				7E87C5C91B25A992003C2B30 /* ParseUI.framework */,
+				7E87C5C51B25A97E003C2B30 /* Parse.framework */,
 				3CACB5001AAC11D700D64D09 /* PickUpBasketball */,
 				3CACB51A1AAC11D800D64D09 /* PickUpBasketballTests */,
 				3CACB4FF1AAC11D700D64D09 /* Products */,
@@ -1075,7 +1060,6 @@
 			isa = PBXGroup;
 			children = (
 				3CACB4FE1AAC11D700D64D09 /* PickUpBasketball.app */,
-				3CACB5171AAC11D800D64D09 /* PickUpBasketballTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1288,24 +1272,6 @@
 			productReference = 3CACB4FE1AAC11D700D64D09 /* PickUpBasketball.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3CACB5161AAC11D800D64D09 /* PickUpBasketballTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3CACB5241AAC11D800D64D09 /* Build configuration list for PBXNativeTarget "PickUpBasketballTests" */;
-			buildPhases = (
-				3CACB5131AAC11D800D64D09 /* Sources */,
-				3CACB5141AAC11D800D64D09 /* Frameworks */,
-				3CACB5151AAC11D800D64D09 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3CACB5191AAC11D800D64D09 /* PBXTargetDependency */,
-			);
-			name = PickUpBasketballTests;
-			productName = PickUpBasketballTests;
-			productReference = 3CACB5171AAC11D800D64D09 /* PickUpBasketballTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1319,13 +1285,9 @@
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 556T43QL5L;
 					};
-					3CACB5161AAC11D800D64D09 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 3CACB4FD1AAC11D700D64D09;
-					};
 				};
 			};
-			buildConfigurationList = 3CACB4F91AAC11D700D64D09 /* Build configuration list for PBXProject "PickUpBasketball" */;
+			buildConfigurationList = 3CACB4F91AAC11D700D64D09 /* Build configuration list for PBXProject "pickupbasketball" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1352,7 +1314,6 @@
 			projectRoot = "";
 			targets = (
 				3CACB4FD1AAC11D700D64D09 /* PickUpBasketball */,
-				3CACB5161AAC11D800D64D09 /* PickUpBasketballTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1399,13 +1360,6 @@
 				3CD04B6C1ADD949800313E12 /* plus.png in Resources */,
 				3CD04F741ADB7FB6001F8018 /* freethrows.png in Resources */,
 				3CD04F701ADB7F9F001F8018 /* quickrelease.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CACB5151AAC11D800D64D09 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1534,23 +1488,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3CACB5131AAC11D800D64D09 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3CACB51E1AAC11D800D64D09 /* PickUpBasketballTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3CACB5191AAC11D800D64D09 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3CACB4FD1AAC11D700D64D09 /* PickUpBasketball */;
-			targetProxy = 3CACB5181AAC11D800D64D09 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3C5473CF1AAE55F1007B541F /* JSQMessages.strings */ = {
@@ -1611,7 +1549,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1631,6 +1570,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1653,7 +1593,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1666,6 +1607,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1676,11 +1618,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PickUpBasketball",
 					"/Users/davidhill/Downloads/codecanyon-10316908-wazzup-ios-78-universal-chat-app-template-objc/WazzUp",
+					"$(PROJECT_DIR)/pickupbasketball/Library",
 				);
 				INFOPLIST_FILE = PickUpBasketball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1690,6 +1634,7 @@
 					"$(PROJECT_DIR)/PickUpBasketball",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1697,11 +1642,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PickUpBasketball",
 					"/Users/davidhill/Downloads/codecanyon-10316908-wazzup-ios-78-universal-chat-app-template-objc/WazzUp",
+					"$(PROJECT_DIR)/pickupbasketball/Library",
 				);
 				INFOPLIST_FILE = PickUpBasketball/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1711,47 +1658,14 @@
 					"$(PROJECT_DIR)/PickUpBasketball",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		3CACB5251AAC11D800D64D09 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PickUpBasketballTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PickUpBasketball.app/PickUpBasketball";
-			};
-			name = Debug;
-		};
-		3CACB5261AAC11D800D64D09 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PickUpBasketballTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PickUpBasketball.app/PickUpBasketball";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3CACB4F91AAC11D700D64D09 /* Build configuration list for PBXProject "PickUpBasketball" */ = {
+		3CACB4F91AAC11D700D64D09 /* Build configuration list for PBXProject "pickupbasketball" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3CACB51F1AAC11D800D64D09 /* Debug */,
@@ -1765,15 +1679,6 @@
 			buildConfigurations = (
 				3CACB5221AAC11D800D64D09 /* Debug */,
 				3CACB5231AAC11D800D64D09 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3CACB5241AAC11D800D64D09 /* Build configuration list for PBXNativeTarget "PickUpBasketballTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3CACB5251AAC11D800D64D09 /* Debug */,
-				3CACB5261AAC11D800D64D09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
