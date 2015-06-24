@@ -153,6 +153,7 @@
          {
              if (error == nil) {
                  //[allObjects removeAllObjects];
+                 
                  [yourStats addObjectsFromArray:objects];
                  NSLog(@"All Object: %@",yourStats);
                  NSMutableArray *twoL=[[NSMutableArray alloc] init];
@@ -165,28 +166,116 @@
                      NSMutableArray *twoR=[[NSMutableArray alloc] init];
                      for (int i=0;i<[yourStats count]; i++) {
                          NSMutableArray *ary = [[NSMutableArray alloc]init];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"type"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"seasonid"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"win"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"yourscore"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"opponentscore"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"twoptmade"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"twoptattempted"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"threeptmade"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"threeptattempted"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"freethrowmade"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"freethrowattempted"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"assists"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"totalrebounds"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"defrebounds"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"offrebounds"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"steals"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"blocks"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"turnovers"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"gamewinner"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"scoringstyle"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"teamsize"]];
-                         [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"fullcourt"]];
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"type"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"type"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"seasonid"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"seasonid"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"win"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"win"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"yourscore"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"yourscore"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"opponentscore"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"opponentscore"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"twoptmade"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"twoptmade"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"twoptattempted"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"twoptattempted"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"threeptmade"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"threeptmade"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"threeptattempted"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"threeptattempted"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"freethrowmade"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"freethrowmade"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"freethrowattempted"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"freethrowattempted"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"assists"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"assists"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"totalrebounds"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"totalrebounds"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"defrebounds"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"defrebounds"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"offrebounds"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"offrebounds"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"steals"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"steals"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"blocks"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"blocks"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"turnovers"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"turnovers"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"gamewinner"]) {
+                              [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"gamewinner"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"scoringstyle"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"scoringstyle"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"teamsize"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"teamsize"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
+                         if ([[yourStats objectAtIndex:i] objectForKey:@"fullcourt"]) {
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"fullcourt"]];
+                         }else{
+                             [ary addObject:@""];
+                         }
                          [twoR addObject:ary];
                      }
                  [rightTableData addObject:twoR];
