@@ -22,6 +22,8 @@
     
     if ([PFUser currentUser] == nil) {
         WelcomeVC *welcomeVC =[self.storyboard instantiateViewControllerWithIdentifier:@"WelcomeVC"];
+//        self.navigationItem.hidesBackButton = YES;//change
+        welcomeVC.navigationItem.hidesBackButton=YES;
         [self.navigationController pushViewController: welcomeVC animated:true];
     }
     

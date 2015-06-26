@@ -135,7 +135,11 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     }
     return self;
 }
-
+//update(26.06.2015)
+-(void)buttonClicked :(id)Sender{
+    [self reloadData];
+}
+//
 - (void)layoutSubviews {
     
     [super layoutSubviews];
@@ -144,6 +148,13 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     
     if (leftHeaderEnable) {
         vertexView.frame = CGRectMake(0, 0, leftHeaderWidth, topHeaderHeight);
+        //update(26.06.2015)
+        UIButton *refreshBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        refreshBtn.frame=vertexView.frame;
+        refreshBtn.backgroundColor=[UIColor clearColor];
+        [refreshBtn addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [vertexView addSubview:refreshBtn];
+        //
         topHeaderScrollView.frame = CGRectMake(leftHeaderWidth + boldSeperatorLineWidth, 0, superWidth - leftHeaderWidth - boldSeperatorLineWidth, topHeaderHeight);
         leftHeaderTableView.frame = CGRectMake(0, topHeaderHeight + boldSeperatorLineWidth, leftHeaderWidth, superHeight - topHeaderHeight - boldSeperatorLineWidth);
         contentScrollView.frame = CGRectMake(leftHeaderWidth + boldSeperatorLineWidth, topHeaderHeight + boldSeperatorLineWidth, superWidth - leftHeaderWidth - boldSeperatorLineWidth, superHeight - topHeaderHeight - boldSeperatorLineWidth);
@@ -231,6 +242,8 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     [target selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
+//Section
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, [tableView rectForHeaderInSection:section].size.height)];;
@@ -258,7 +271,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
             }
              */
             
-            subView.backgroundColor = [UIColor colorWithRed:0/255.0f green:31/255.0f blue:112/255.0f alpha:1.0f];
+            subView.backgroundColor =[UIColor colorWithRed:0/255.0f green:31/255.0f blue:112/255.0f alpha:1.0f];
             
             NSString *tagStr = [NSString stringWithFormat:@"%@_%@", @(section), @(i)];
             subView.tag = (int)tagStr;
@@ -435,7 +448,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
         
         UIColor *color = [self headerBgColorColumn:i];
         view.backgroundColor = color;
-        label.backgroundColor = color;
+        label.backgroundColor =color;
         
         [view addSubview:label];
         
@@ -474,9 +487,6 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 }
 
 - (CGFloat)accessContentTableViewCellWidth:(NSUInteger)column {
-    NSLog(@"responseContentTableCellWidth=%hhd",responseContentTableCellWidth);
-    
-    NSLog(@"responseContentTableCellWidth=%f",cellWidth);
     return responseContentTableCellWidth ? [datasource tableView:self contentTableCellWidth:column] : cellWidth;
 }
 
@@ -594,7 +604,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 #pragma mark - GestureRecognizer
 
 - (void)leftHeaderTap:(UITapGestureRecognizer *)recognizer {
-    
+    NSLog(@"Lef Header TableView");
     @synchronized(self) {
         NSUInteger section = recognizer.view.tag;
         [self buildSectionFoledStatus:section];
@@ -633,9 +643,10 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     NSInteger column = indexPath.row;
     
     NSString *columnStr = [NSString stringWithFormat:@"%@_%@", @(section), @(column)];
+    NSLog(@"columnStr===> %@",columnStr);
     
     NSInteger columnFlag = [[columnSortedTapFlags objectForKey:columnStr] integerValue];
-    
+    NSLog(@"columnStr===> %@",columnStr);
     if (section == -1) {
         NSUInteger rows = [self numberOfSections];
         
@@ -646,7 +657,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
         }else {
             newType = TableColumnSortTypeDesc;
         }
-        
+         NSLog(@"newType===> %u",newType);
         for (NSInteger i = 0; i < rows; i++) {
             NSIndexPath *iPath = [NSIndexPath indexPathForRow:column inSection:i];
             
@@ -676,15 +687,36 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     NSInteger columnFlag = [[columnSortedTapFlags objectForKey:columnStr] integerValue];
     
     NSArray *leftHeaderDataInSection = [leftHeaderDataArray objectAtIndex:section];
+    NSLog(@"leftHeaderDataInSection= %@",leftHeaderDataInSection);
     NSArray *contentDataInSection = [contentDataArray objectAtIndex:section];
-    
+     NSLog(@"contentDataInSection= %@",contentDataInSection);
+
+
     NSArray *sortContentData = [contentDataInSection sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        
-        NSComparisonResult result =  [[obj1 objectAtIndex:column] compare:[obj2 objectAtIndex:column]];
-        
+    //update(26.06.2015)
+        NSComparisonResult result;
+        if ([[obj1 objectAtIndex:column] rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]].location != NSNotFound) {
+            NSLog(@"NSNumber");
+            result =[((NSString *)[obj1 objectAtIndex:column]) compare:((NSString *)[obj2 objectAtIndex:column]) options:NSNumericSearch];
+        }else{
+            NSLog(@"NSString");
+            result =  [[obj1 objectAtIndex:column] compare:[obj2 objectAtIndex:column]];
+        }
+    //
+//        if([[obj1 objectAtIndex:column] isKindOfClass:[NSNumber class]]) {
+//            NSLog(@"NSNumber");
+//            result =  [(NSString *)[obj1 objectAtIndex:column] compare:(NSString *)[obj2 objectAtIndex:column]] ;
+//        }
+//        else if([[obj1 objectAtIndex:column] isKindOfClass:[NSString class]]){
+//            NSLog(@"NSString");
+//            
+//        }else{
+//            NSLog(@"none of these");
+//        }
         return result;
     }];
-    
+ 
+    NSLog(@"sortContentData= %@",sortContentData);
     NSMutableArray *sortIndexAry = [NSMutableArray array];
     for (int i = 0; i < sortContentData.count; i++) {
         id objI = [sortContentData objectAtIndex:i];

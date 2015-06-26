@@ -135,6 +135,7 @@
         
         // Open the Login VC again
         WelcomeVC *welcomeVC =[self.storyboard instantiateViewControllerWithIdentifier:@"WelcomeVC"];
+        welcomeVC.navigationItem.hidesBackButton=YES;
         [self.navigationController pushViewController: welcomeVC animated:true];
     }
     

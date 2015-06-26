@@ -153,7 +153,7 @@
          {
              if (error == nil) {
                  //[allObjects removeAllObjects];
-                 
+                 [yourStats removeAllObjects];
                  [yourStats addObjectsFromArray:objects];
                  NSLog(@"All Object: %@",yourStats);
                  NSMutableArray *twoL=[[NSMutableArray alloc] init];
@@ -161,6 +161,11 @@
                       NSString *dateStr=[self dateToStringConvertion:[[yourStats objectAtIndex:j] valueForKey:@"createdAt"]];
                      [twoL addObject:dateStr];
                  }
+//                 NSSortDescriptor *sortDescriptor= [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+//                 NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+//                 NSArray *sortedArray = [twoL sortedArrayUsingDescriptors:sortDescriptors];
+//                 NSLog(@"sortedArray=%@",sortedArray);
+                 [leftTableData removeAllObjects];
                  [leftTableData addObject:twoL];
                  
                      NSMutableArray *twoR=[[NSMutableArray alloc] init];
@@ -278,6 +283,7 @@
                          }
                          [twoR addObject:ary];
                      }
+                 [rightTableData removeAllObjects];
                  [rightTableData addObject:twoR];
                  NSLog(@"left array=%@",leftTableData);
                  NSLog(@"right array=%@",rightTableData);
@@ -301,6 +307,7 @@
          }];
     }
 }
+
 -(NSString *)dateToStringConvertion :(NSDate *)dateString{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];

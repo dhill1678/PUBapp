@@ -25,6 +25,8 @@
 @implementation WelcomeVC
 
 -(void)viewWillAppear:(BOOL)animated {
+//     self.navigationItem.hidesBackButton = YES;//change
+//     self.navigationItem.backBarButtonItem.title = @"Samrat";//change
     //[self.navigationController.navigationBar setTintColor:[UIColor clearColor]];
 }
 
@@ -34,11 +36,7 @@
     // Set controller's title
     self.title = @"Sign In"; // changed
     
-    
-    self.navigationItem.hidesBackButton = YES;//change
-    
 
-    
     // Round the corners of the Logo
     _logoImage.layer.cornerRadius = 10;
     
