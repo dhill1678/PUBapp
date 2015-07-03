@@ -15,8 +15,8 @@
 //  Copyright (c) 2014 Jesse Squires
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
-
 #import <UIKit/UIKit.h>
+//#import <UIKit/UIKit.h>
 
 /**
  *  A `JSQMessagesCollectionViewFlowLayoutInvalidationContext` object specifies properties for 

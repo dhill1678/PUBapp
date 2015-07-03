@@ -439,6 +439,7 @@
     if (![_twoPtMadeOut.text isEqualToString:@"-"]) {
         [pickup setObject:_twoPtMadeOut.text forKey:@"twoptmade"];
     }
+    
     if (![_twoPtAttOut.text isEqualToString:@"-"]) {
         if ([_twoPtAttOut.text integerValue] >= [_twoPtMadeOut.text integerValue]) {
             [pickup setObject:_twoPtAttOut.text forKey:@"twoptattempted"];

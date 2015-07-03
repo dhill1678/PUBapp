@@ -37,5 +37,8 @@
 - (IBAction)GoGameLog:(id)sender {
     [self performSegueWithIdentifier:@"SortableTable" sender:self];
 }
+- (IBAction)GoChart:(id)sender {
+     [self performSegueWithIdentifier:@"ChartScreen" sender:self];
+}
 
 @end

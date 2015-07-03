@@ -174,9 +174,16 @@
 		3CD04F781ADB7FD2001F8018 /* shotchart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04F771ADB7FD2001F8018 /* shotchart.png */; };
 		7E4E83401B391FB100AE1D9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4E833F1B391FB100AE1D9F /* FacebookSDK.framework */; };
 		7E4E83411B391FE400AE1D9F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B25A97E003C2B30 /* Parse.framework */; };
+		7E9A816E1B43C04B003CFB3D /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81631B43C04B003CFB3D /* UUChart.m */; };
+		7E9A816F1B43C04B003CFB3D /* UUChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81651B43C04B003CFB3D /* UUChartLabel.m */; };
+		7E9A81701B43C04B003CFB3D /* UUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81671B43C04B003CFB3D /* UUColor.m */; };
+		7E9A81711B43C04B003CFB3D /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81691B43C04B003CFB3D /* UULineChart.m */; };
+		7E9A81721B43C04B003CFB3D /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A816B1B43C04B003CFB3D /* UUBar.m */; };
+		7E9A81731B43C04B003CFB3D /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A816C1B43C04B003CFB3D /* UUBarChart.m */; };
 		7EDC0B201B37FB070009BF38 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C91B25A992003C2B30 /* ParseUI.framework */; };
 		7EDC0B211B37FB070009BF38 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */; };
 		7EDC0B271B381DBB0009BF38 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDC0B261B381DBB0009BF38 /* Bolts.framework */; };
+		7EFE3DC01B42D098001D1BB8 /* ChartScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE3DBF1B42D098001D1BB8 /* ChartScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -495,7 +502,21 @@
 		7E87C5C51B25A97E003C2B30 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = pickupbasketball/Library/Parse.framework; sourceTree = "<group>"; };
 		7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = pickupbasketball/Library/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		7E87C5C91B25A992003C2B30 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = pickupbasketball/Library/ParseUI.framework; sourceTree = "<group>"; };
+		7E9A81621B43C04B003CFB3D /* UUChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChart.h; sourceTree = "<group>"; };
+		7E9A81631B43C04B003CFB3D /* UUChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUChart.m; sourceTree = "<group>"; };
+		7E9A81641B43C04B003CFB3D /* UUChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChartLabel.h; sourceTree = "<group>"; };
+		7E9A81651B43C04B003CFB3D /* UUChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUChartLabel.m; sourceTree = "<group>"; };
+		7E9A81661B43C04B003CFB3D /* UUColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUColor.h; sourceTree = "<group>"; };
+		7E9A81671B43C04B003CFB3D /* UUColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUColor.m; sourceTree = "<group>"; };
+		7E9A81681B43C04B003CFB3D /* UULineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UULineChart.h; sourceTree = "<group>"; };
+		7E9A81691B43C04B003CFB3D /* UULineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UULineChart.m; sourceTree = "<group>"; };
+		7E9A816A1B43C04B003CFB3D /* UUBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBarChart.h; sourceTree = "<group>"; };
+		7E9A816B1B43C04B003CFB3D /* UUBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBar.m; sourceTree = "<group>"; };
+		7E9A816C1B43C04B003CFB3D /* UUBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBarChart.m; sourceTree = "<group>"; };
+		7E9A816D1B43C04B003CFB3D /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
 		7EDC0B261B381DBB0009BF38 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = pickupbasketball/Library/Bolts.framework; sourceTree = "<group>"; };
+		7EFE3DBE1B42D098001D1BB8 /* ChartScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartScreen.h; sourceTree = "<group>"; };
+		7EFE3DBF1B42D098001D1BB8 /* ChartScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartScreen.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1067,6 +1088,8 @@
 		3CACB5001AAC11D700D64D09 /* PickUpBasketball */ = {
 			isa = PBXGroup;
 			children = (
+				7EFE3DBD1B42D078001D1BB8 /* Chart */,
+				7EFE3DB91B42C727001D1BB8 /* ChartLibrary */,
 				3C5473141AAE40F8007B541F /* Configs.h */,
 				3CACB5051AAC11D800D64D09 /* AppDelegate.h */,
 				3CACB5061AAC11D800D64D09 /* AppDelegate.m */,
@@ -1252,6 +1275,36 @@
 			name = IQDropDownTextField;
 			sourceTree = "<group>";
 		};
+		7EFE3DB91B42C727001D1BB8 /* ChartLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				7E9A81621B43C04B003CFB3D /* UUChart.h */,
+				7E9A81631B43C04B003CFB3D /* UUChart.m */,
+				7E9A81641B43C04B003CFB3D /* UUChartLabel.h */,
+				7E9A81651B43C04B003CFB3D /* UUChartLabel.m */,
+				7E9A81661B43C04B003CFB3D /* UUColor.h */,
+				7E9A81671B43C04B003CFB3D /* UUColor.m */,
+				7E9A81681B43C04B003CFB3D /* UULineChart.h */,
+				7E9A81691B43C04B003CFB3D /* UULineChart.m */,
+				7E9A816B1B43C04B003CFB3D /* UUBar.m */,
+				7E9A816A1B43C04B003CFB3D /* UUBarChart.h */,
+				7E9A816C1B43C04B003CFB3D /* UUBarChart.m */,
+				7E9A816D1B43C04B003CFB3D /* UUBar.h */,
+			);
+			name = ChartLibrary;
+			path = pickupbasketball/ChartLibrary;
+			sourceTree = SOURCE_ROOT;
+		};
+		7EFE3DBD1B42D078001D1BB8 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				7EFE3DBE1B42D098001D1BB8 /* ChartScreen.h */,
+				7EFE3DBF1B42D098001D1BB8 /* ChartScreen.m */,
+			);
+			name = Chart;
+			path = pickupbasketball/Chart;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1374,9 +1427,11 @@
 				3C5474651AAE55F1007B541F /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				3C54744C1AAE55F1007B541F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3C5474681AAE55F1007B541F /* JSQMediaItem.m in Sources */,
+				7E9A81711B43C04B003CFB3D /* UULineChart.m in Sources */,
 				3C5472E31AAC82F9007B541F /* REFrostedContainerViewController.m in Sources */,
 				3C54745A1AAE55F1007B541F /* UIImage+JSQMessages.m in Sources */,
 				3C5474631AAE55F1007B541F /* JSQMessagesToolbarButtonFactory.m in Sources */,
+				7E9A81731B43C04B003CFB3D /* UUBarChart.m in Sources */,
 				3C5472E61AAC82F9007B541F /* UIView+REFrostedViewController.m in Sources */,
 				3C5474801AAE55F1007B541F /* MBProgressHUD.m in Sources */,
 				3CACB50A1AAC11D800D64D09 /* ViewController.m in Sources */,
@@ -1386,7 +1441,9 @@
 				3C54744D1AAE55F1007B541F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				3C5474731AAE55F1007B541F /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				3CD04B5A1ADC36E200313E12 /* IQKeyboardReturnKeyHandler.m in Sources */,
+				7EFE3DC01B42D098001D1BB8 /* ChartScreen.m in Sources */,
 				3CD04B5B1ADC36E200313E12 /* IQNSArray+Sort.m in Sources */,
+				7E9A81701B43C04B003CFB3D /* UUColor.m in Sources */,
 				3C3214C71AEB657A004A989E /* UIView+XCMultiSortTableView.m in Sources */,
 				3C5474581AAE55F1007B541F /* UIColor+JSQMessages.m in Sources */,
 				3C5474441AAE55F1007B541F /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1398,6 +1455,7 @@
 				3C64A1AD1AB68A8900D002CC /* NewGameViewController.m in Sources */,
 				3C5473421AAE4ADD007B541F /* AboutVC.m in Sources */,
 				3C5472E71AAC82F9007B541F /* UIViewController+REFrostedViewController.m in Sources */,
+				7E9A816E1B43C04B003CFB3D /* UUChart.m in Sources */,
 				3C5474601AAE55F1007B541F /* JSQMessagesBubbleImageFactory.m in Sources */,
 				3C5473231AAE46AD007B541F /* Messages.m in Sources */,
 				3C54747B1AAE55F1007B541F /* JSQMessagesToolbarContentView.m in Sources */,
@@ -1405,8 +1463,10 @@
 				3C5473131AAE406D007B541F /* WelcomeVC.m in Sources */,
 				3C64A1AE1AB68A8900D002CC /* PickUpViewController.m in Sources */,
 				3C3214C91AEB657A004A989E /* XCMultiSortTableViewBGScrollView.m in Sources */,
+				7E9A816F1B43C04B003CFB3D /* UUChartLabel.m in Sources */,
 				3C3214C81AEB657A004A989E /* XCMultiSortTableView.m in Sources */,
 				3C5473111AAE406D007B541F /* LoginVC.m in Sources */,
+				7E9A81721B43C04B003CFB3D /* UUBar.m in Sources */,
 				3C54746F1AAE55F1007B541F /* JSQMessagesCollectionView.m in Sources */,
 				3CD04B5D1ADC36E200313E12 /* IQTextView.m in Sources */,
 				3C64A1991AB6871C00D002CC /* ConsecutiveShotsViewController.m in Sources */,

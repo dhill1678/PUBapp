@@ -30,6 +30,12 @@
 @interface SortableTableViewController : UIViewController
 {
     XCMultiTableView *tableView;
+    
+    //Samrat
+    UIView *loadingBackground;
+    UILabel *loadingText;
+    UIActivityIndicatorView *indicator;
+    //
 }
 
 - (IBAction)filter:(id)sender;

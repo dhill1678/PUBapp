@@ -540,6 +540,9 @@
                                     <color key="titleColor" red="0.45098039220000002" green="0.59999999999999998" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="GoChart:" destination="UHg-ts-zda" eventType="touchUpInside" id="D8T-nE-sfU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -562,13 +565,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="Chart" destination="5WT-Ct-Msz" id="P3L-Fb-dYL"/>
                         <outlet property="GameLog" destination="VcE-jf-823" id="oIZ-00-0gE"/>
                         <segue destination="mAt-8h-vB6" kind="show" identifier="SortableTable" id="JEH-9e-Vao"/>
+                        <segue destination="STN-L0-y2t" kind="show" identifier="ChartScreen" id="BZp-9o-IPa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMX-CD-teR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1813" y="2641"/>
+            <point key="canvasLocation" x="1865" y="2613"/>
         </scene>
         <!--ProfileVC-->
         <scene sceneID="kWG-Bl-quq">
@@ -1559,7 +1564,52 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aOm-LI-ske" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="2641"/>
+            <point key="canvasLocation" x="2569" y="2613"/>
+        </scene>
+        <!--Chart-->
+        <scene sceneID="2gH-ou-HKs">
+            <objects>
+                <viewController storyboardIdentifier="ChartScreen" id="STN-L0-y2t" customClass="ChartScreen" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8s3-rb-M8G"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xgk-3j-Vbb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WDd-2F-BVg">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ARg-bl-9Cu">
+                                <rect key="frame" x="36" y="100" width="529" height="400"/>
+                                <color key="backgroundColor" red="0.2274509804" green="0.56862745100000001" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="STN-L0-y2t" id="9cL-YS-I3q"/>
+                                </connections>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Line Chart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-eD-2jt">
+                                <rect key="frame" x="203" y="72" width="194" height="27"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="top" secondItem="aJg-eD-2jt" secondAttribute="bottom" constant="1" id="1qP-Tk-DdA"/>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="width" secondItem="WDd-2F-BVg" secondAttribute="width" id="6vq-hM-VUr"/>
+                            <constraint firstAttribute="centerX" secondItem="aJg-eD-2jt" secondAttribute="centerX" id="Egw-PP-9cQ"/>
+                            <constraint firstAttribute="centerX" secondItem="ARg-bl-9Cu" secondAttribute="centerX" id="ROk-QK-Jzv"/>
+                            <constraint firstAttribute="centerY" secondItem="ARg-bl-9Cu" secondAttribute="centerY" id="ylt-0j-K6I"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chart" id="i18-CY-yZQ"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="showChartScrollView" destination="ARg-bl-9Cu" id="Hf7-Co-gOo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VpB-c7-omi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569" y="3362"/>
         </scene>
         <!--Contacts-->
         <scene sceneID="aSL-uK-lXe">
@@ -1640,7 +1690,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Br-uw-IUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2469" y="3669"/>
+            <point key="canvasLocation" x="2416" y="4023"/>
         </scene>
         <!--Practice-->
         <scene sceneID="A1b-L8-WZZ">

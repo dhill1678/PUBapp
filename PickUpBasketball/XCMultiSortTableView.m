@@ -135,6 +135,8 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     }
     return self;
 }
+
+
 //update(26.06.2015)
 -(void)buttonClicked :(id)Sender{
     [self reloadData];
@@ -379,7 +381,9 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     
     contentTableView.frame = CGRectMake(0.0f, 0.0f, width, self.bounds.size.height - topHeaderHeight - boldSeperatorLineWidth);
 }
-
+-(CGFloat)tableViewContentSizeHight{
+    return (topHeaderScrollView.contentSize.height+contentScrollView.contentSize.height);
+}
 - (void)buildSectionFoledStatus:(NSInteger)section {
     if (sectionFoldedStatus == nil) sectionFoldedStatus = [NSMutableDictionary dictionary];
 

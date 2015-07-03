@@ -50,13 +50,13 @@
     
     // initialize arrays
     yourStats = [[NSMutableArray alloc] init];
-    
+    [self initData];
     [self loadParse];
     NSLog(@"Your Stats: %@",yourStats);
     NSLog(@"Your Stats Count: %lu",(unsigned long)yourStats.count);
     
-    [self initData];
-    
+//    [self initData];
+  
 //    tableView = [[XCMultiTableView alloc] initWithFrame:CGRectInset(self.view.bounds, 5.0f, 5.0f)];
 //    tableView.leftHeaderEnable = YES;
 //    tableView.datasource = self;
@@ -141,6 +141,7 @@
 
 - (void)loadParse {
     if ([PFUser currentUser] != nil) {
+        [self AddLoadingView];
         PFQuery *query = [PFQuery queryWithClassName:PF_GAME_CLASS_NAME];
         [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
         NSLog(@"Current User=%@ ",[PFUser currentUser]);
@@ -303,7 +304,11 @@
                  tableView.leftHeaderEnable = YES;
                  tableView.datasource = self;
                  [self.view addSubview:tableView];
-            } else [ProgressHUD showError:@"No Stats To Show"];
+                  [self RemoveLoadingView];
+             } else {
+                 [self RemoveLoadingView];
+                 [ProgressHUD showError:@"No Stats To Show"];
+             }
          }];
     }
 }
@@ -374,4 +379,37 @@
 //    NSLog(@"Your Stats Count: %lu",(unsigned long)yourStats.count);
 //    NSLog(@"Your Stats 1: %@",yourStats[1]);
 }
+
+#pragma mark-
+#pragma mark Loading
+-(void)AddLoadingView
+{
+    loadingBackground = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 150, 70)];
+    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicator.frame = CGRectMake(0, 0, 10, 10);
+    loadingText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 62, 20)];
+    loadingText.font = [UIFont boldSystemFontOfSize:13];
+    loadingText.center = CGPointMake(self.view.center.x + 20, self.view.center.y + 0);
+    loadingBackground.layer.cornerRadius=10;
+    loadingBackground.backgroundColor = [UIColor blackColor];
+    loadingBackground.center = self.view.center;
+    [indicator startAnimating];
+    indicator.center = CGPointMake(self.view.center.x - 40, self.view.center.y + 0);
+    loadingText.text = @"Loading...";
+    loadingText.textColor = [UIColor whiteColor];
+    loadingText.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:loadingBackground];
+    [self.view addSubview:indicator];
+    [self.view addSubview:loadingText];
+    self.view.userInteractionEnabled=NO;
+}
+
+-(void)RemoveLoadingView
+{
+    [loadingBackground removeFromSuperview];
+    [indicator removeFromSuperview];
+    [loadingText removeFromSuperview];
+    self.view.userInteractionEnabled=YES;
+}
+
 @end

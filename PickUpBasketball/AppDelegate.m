@@ -30,7 +30,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
     /* IMPORTANT: PASTE HERE YOUR APP AND CLIEMT ID's from your Parse account */
     [Parse setApplicationId:PARSE_APP_ID
                   clientKey:PARSE_CLIENT_KEY];

@@ -15,5 +15,6 @@
 
 - (IBAction)showMenu;
 - (IBAction)GoGameLog:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *Chart;
 
 @end
