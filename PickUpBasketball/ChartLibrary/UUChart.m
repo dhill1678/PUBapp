@@ -129,6 +129,10 @@
     [self setUpChart];
     [view addSubview:self];
 }
+- (void)removeFromView
+{
+    [self removeFromSuperview];
+}
 
 -(void)strokeChart
 {

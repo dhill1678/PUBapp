@@ -5,6 +5,7 @@
 //  Created by Samrat on 30/06/15.
 //  Copyright (c) 2015 AppMuumba. All rights reserved.
 //
+#import "Common.h"
 #import "Configs.h"
 #import "ProgressHUD.h"
 #import "UUChart.h"
@@ -21,8 +22,18 @@
     UUChart *chartView;
     NSMutableArray *xLableArray;
     NSMutableArray *yValueArray;
+    NSMutableArray *arrayOfTitel;
+    BOOL isShown;
     
+    UIColor *SelectedCellBGColor;
+    UIColor *NotSelectedCellBGColor;
+    NSMutableArray *cellSelectedArray;
 }
 @property (strong, nonatomic) IBOutlet UIScrollView *showChartScrollView;
+@property (strong, nonatomic) IBOutlet UITableView *chartListTableView;
+@property (strong, nonatomic) IBOutlet UILabel *lblLineChart;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowImageView;
+- (IBAction)btnLineChartAction:(id)sender;
+
 
 @end

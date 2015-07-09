@@ -900,6 +900,9 @@
                                     <constraint firstAttribute="centerX" secondItem="GLw-Ol-BCH" secondAttribute="centerX" id="LhU-1B-FZf"/>
                                     <constraint firstItem="GLw-Ol-BCH" firstAttribute="top" secondItem="wop-Yb-RPT" secondAttribute="top" id="hra-FK-e6J"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="736"/>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1179,6 +1182,9 @@
                                     <constraint firstItem="5pL-SO-PY2" firstAttribute="top" secondItem="zvf-6b-MXv" secondAttribute="top" id="pYP-hB-esI"/>
                                     <constraint firstAttribute="bottom" secondItem="5pL-SO-PY2" secondAttribute="bottom" id="xhd-I1-p0L"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1368,6 +1374,9 @@
                                     <constraint firstAttribute="centerX" secondItem="tLd-sb-8MT" secondAttribute="centerX" id="UFU-hK-5Y6"/>
                                     <constraint firstItem="tLd-sb-8MT" firstAttribute="top" secondItem="7HQ-Kb-mZY" secondAttribute="top" id="Yb5-gg-qUW"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1578,32 +1587,77 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ARg-bl-9Cu">
-                                <rect key="frame" x="36" y="100" width="529" height="400"/>
-                                <color key="backgroundColor" red="0.2274509804" green="0.56862745100000001" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select any from list" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-eD-2jt">
+                                <rect key="frame" x="180" y="70" width="240" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="jAY-6g-MK2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.11764706671237946" blue="0.43921571969985962" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARg-bl-9Cu">
+                                <rect key="frame" x="0.0" y="100" width="600" height="500"/>
+                                <color key="backgroundColor" red="0.0" green="0.1215686275" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="STN-L0-y2t" id="9cL-YS-I3q"/>
                                 </connections>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Line Chart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-eD-2jt">
-                                <rect key="frame" x="203" y="72" width="194" height="27"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="30" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Nxc-Qd-U4c">
+                                <rect key="frame" x="180" y="101" width="240" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="STN-L0-y2t" id="TTb-S8-0fl"/>
+                                    <outlet property="delegate" destination="STN-L0-y2t" id="bYf-Bm-9Qk"/>
+                                </connections>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="pNH-3c-5Ul">
+                                <rect key="frame" x="421" y="78" width="20" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="izm-pY-0aS"/>
+                                    <constraint firstAttribute="width" constant="20" id="jbk-S5-M5d"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYe-1j-WjM">
+                                <rect key="frame" x="159" y="70" width="283" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="283" id="Fye-a1-u8H"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnLineChartAction:" destination="STN-L0-y2t" eventType="touchUpInside" id="vuP-5g-jqD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="top" secondItem="aJg-eD-2jt" secondAttribute="bottom" constant="1" id="1qP-Tk-DdA"/>
-                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="width" secondItem="WDd-2F-BVg" secondAttribute="width" id="6vq-hM-VUr"/>
-                            <constraint firstAttribute="centerX" secondItem="aJg-eD-2jt" secondAttribute="centerX" id="Egw-PP-9cQ"/>
-                            <constraint firstAttribute="centerX" secondItem="ARg-bl-9Cu" secondAttribute="centerX" id="ROk-QK-Jzv"/>
-                            <constraint firstAttribute="centerY" secondItem="ARg-bl-9Cu" secondAttribute="centerY" id="ylt-0j-K6I"/>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="top" secondItem="aJg-eD-2jt" secondAttribute="bottom" constant="3" id="28j-eJ-RDc"/>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="centerX" secondItem="Nxc-Qd-U4c" secondAttribute="centerX" id="Eh6-fA-iB5"/>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="top" secondItem="HYe-1j-WjM" secondAttribute="bottom" constant="2" id="FFt-Ap-qda"/>
+                            <constraint firstItem="Nxc-Qd-U4c" firstAttribute="top" secondItem="HYe-1j-WjM" secondAttribute="bottom" constant="3" id="GHm-kh-8LD"/>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="leading" secondItem="WDd-2F-BVg" secondAttribute="leading" id="Jlc-gh-pU8"/>
+                            <constraint firstItem="Xgk-3j-Vbb" firstAttribute="top" secondItem="Nxc-Qd-U4c" secondAttribute="bottom" constant="249" id="ORu-OH-8oy"/>
+                            <constraint firstAttribute="trailing" secondItem="ARg-bl-9Cu" secondAttribute="trailing" id="TLX-ub-PxP"/>
+                            <constraint firstItem="pNH-3c-5Ul" firstAttribute="centerY" secondItem="HYe-1j-WjM" secondAttribute="centerY" id="TUa-iq-Rg0"/>
+                            <constraint firstItem="pNH-3c-5Ul" firstAttribute="leading" secondItem="aJg-eD-2jt" secondAttribute="trailing" constant="1" id="XMy-kS-0Pw"/>
+                            <constraint firstItem="aJg-eD-2jt" firstAttribute="leading" secondItem="Nxc-Qd-U4c" secondAttribute="leading" id="Zzb-cY-7cd"/>
+                            <constraint firstItem="aJg-eD-2jt" firstAttribute="top" secondItem="HYe-1j-WjM" secondAttribute="top" id="bRW-YU-xgK"/>
+                            <constraint firstItem="Nxc-Qd-U4c" firstAttribute="trailing" secondItem="aJg-eD-2jt" secondAttribute="trailing" id="d0a-6l-T0Y"/>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="top" secondItem="pNH-3c-5Ul" secondAttribute="bottom" constant="10" id="e4w-py-qgR"/>
+                            <constraint firstItem="HYe-1j-WjM" firstAttribute="centerX" secondItem="aJg-eD-2jt" secondAttribute="centerX" id="oFU-6b-huY"/>
+                            <constraint firstItem="ARg-bl-9Cu" firstAttribute="bottom" secondItem="Xgk-3j-Vbb" secondAttribute="top" id="q6f-Kl-1r3"/>
+                            <constraint firstItem="aJg-eD-2jt" firstAttribute="top" secondItem="8s3-rb-M8G" secondAttribute="bottom" constant="6" id="tDt-CX-1QZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chart" id="i18-CY-yZQ"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="arrowImageView" destination="pNH-3c-5Ul" id="9fp-z4-Q4N"/>
+                        <outlet property="chartListTableView" destination="Nxc-Qd-U4c" id="TKd-yM-Ksi"/>
+                        <outlet property="lblLineChart" destination="aJg-eD-2jt" id="utg-b4-dKR"/>
                         <outlet property="showChartScrollView" destination="ARg-bl-9Cu" id="Hf7-Co-gOo"/>
                     </connections>
                 </viewController>
@@ -3976,6 +4030,7 @@
         <image name="bubble" width="22" height="19"/>
         <image name="close.png" width="400" height="400"/>
         <image name="defaultProfileImage" width="80" height="80"/>
+        <image name="downArrow.png" width="40" height="23"/>
         <image name="freethrows.png" width="661" height="101"/>
         <image name="heatcheck.png" width="661" height="101"/>
         <image name="helpbox.png" width="893" height="646"/>

@@ -58,7 +58,7 @@ typedef enum {
 -(id)initwithUUChartDataFrame:(CGRect)rect withSource:(id<UUChartDataSource>)dataSource withStyle:(UUChartStyle)style;
 
 - (void)showInView:(UIView *)view;
-
+- (void)removeFromView;
 -(void)strokeChart;
 
 @end

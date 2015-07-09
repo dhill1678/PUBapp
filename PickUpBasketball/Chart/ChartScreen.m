@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 AppMuumba. All rights reserved.
 //
 #import "ChartScreen.h"
-@interface ChartScreen ()
+
+
+@interface ChartScreen ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
 
@@ -14,36 +16,52 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    cellSelectedArray=[[NSMutableArray alloc] init];
+    isShown=FALSE;
+    SelectedCellBGColor = [UIColor colorWithRed:0.0f/255.0f green:31.0f/255.0f blue:112.0f/255.0f alpha:1.0f];
+    NotSelectedCellBGColor =[UIColor colorWithRed:115.0f/255.0f green:153.0f/255.0f blue:198.0f/255.0f alpha:1.0f];
     yourStats = [[NSMutableArray alloc] init];
-    [self loadParse];
+    arrayOfTitel=[[NSMutableArray alloc] initWithObjects:@"yourscore",@"opponentscore",@"twoptmade",@"twoptattempted",@"threeptmade",@"threeptattempted",@"freethrowmade",@"freethrowattempted",@"assists",@"totalrebounds",@"defrebounds",@"offrebounds",@"steals",@"blocks",@"turnovers",@"scoringstyle",nil];
+    [cellSelectedArray addObject:[NSNumber numberWithInt:0]];
+    _lblLineChart.text=[[arrayOfTitel objectAtIndex:0] uppercaseString];
+    [self loadParse:[arrayOfTitel objectAtIndex:0]];
+    self.chartListTableView.alpha=0.0;
+}
+
+#pragma mark - Select First Row as default in UITableView
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self.chartListTableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - Chartview Creat
 -(void)loadChartView{
-    int arrayCount=[yourStats count];
+    NSInteger arrayCount=[yValueArray count];
+    NSArray *arr=[yValueArray objectAtIndex:0];
     NSLog(@"Array count =%d",arrayCount);
-    _showChartScrollView.contentSize=CGSizeMake((64*arrayCount), 400);
-    chartView = [[UUChart alloc]initwithUUChartDataFrame:CGRectMake(10, 10, _showChartScrollView.contentSize.width -20, 380)
+    NSLog(@"Arr count =%lu",(unsigned long)[arr count]);
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    if(70*[arr count] > width){
+         _showChartScrollView.contentSize=CGSizeMake((70*[arr count]), _showChartScrollView.frame.size.height);
+    }else{
+         _showChartScrollView.contentSize=CGSizeMake(width, _showChartScrollView.frame.size.height);
+    }
+    if(chartView!=nil){
+        [chartView removeFromView];
+    }
+    chartView = [[UUChart alloc]initwithUUChartDataFrame:CGRectMake(10, 10, _showChartScrollView.contentSize.width -20, _showChartScrollView.contentSize.height-20)
                                               withSource:self
                                                withStyle:UUChartLineStyle];
     [chartView showInView:_showChartScrollView];
 }
 
--(NSArray *)makeGameLineChartArray :(NSString *)str{
-    NSMutableArray *arr=[[NSMutableArray alloc] init];
-    for (int j=0;j<[yourStats count]; j++) {
-        if ([[yourStats objectAtIndex:j] objectForKey:str]) {
-            [arr addObject:[NSString stringWithFormat:@"%@",[[yourStats objectAtIndex:j] valueForKey:str]]];
-        }else{
-            [arr addObject:@"0"];
-        }
-    }
-    NSArray *array = [[NSArray arrayWithArray:arr] copy];
-    return array;
-}
--(void)loadParse{
+#pragma mark - Parse Load
+-(void)loadParse :(NSString *)chartTitelName{
      if ([PFUser currentUser] != nil) {
          [self AddLoadingView];
          PFQuery *query = [PFQuery queryWithClassName:PF_GAME_CLASS_NAME];
@@ -57,14 +75,45 @@
                   [yourStats addObjectsFromArray:objects];
                   xLableArray=[[NSMutableArray alloc] init];
                   yValueArray =[[NSMutableArray alloc] init];
-                  NSMutableArray *arrayOfTitel=[[NSMutableArray alloc] initWithObjects:@"yourscore",@"opponentscore",@"twoptmade",@"twoptattempted",@"threeptmade",@"threeptattempted",@"freethrowmade",@"freethrowattempted",@"assists",@"totalrebounds",@"defrebounds",@"offrebounds",@"steals",@"blocks",@"turnovers",@"scoringstyle",nil];
-                  for (int i=0; i<[arrayOfTitel count]; i++) {
-                      [yValueArray addObject: [self makeGameLineChartArray:[arrayOfTitel objectAtIndex:i]]];
-                  }
+                  NSMutableArray *tempXLabelArray=[[NSMutableArray alloc]init];
+                  NSMutableArray *tempYValueArray=[[NSMutableArray alloc]init];
+                  NSMutableArray *xLabelCountArray=[[NSMutableArray alloc]init];
                   for (int j=0;j<[yourStats count]; j++) {
                       NSString *dateStr=[self dateToStringConvertion:[[yourStats objectAtIndex:j] valueForKey:@"createdAt"]];
-                      [xLableArray addObject:dateStr];
+                      [tempXLabelArray addObject:dateStr];
                   }
+                  NSLog(@"temp XLabelArray = %@",tempXLabelArray);
+                  NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:tempXLabelArray];
+                  [xLableArray addObjectsFromArray:[orderedSet array]];
+                  NSLog(@"x LableArray = %@",xLableArray);
+                  for (int j=0;j<[yourStats count]; j++) {
+                      if ([[yourStats objectAtIndex:j] objectForKey:chartTitelName]) {
+                          [tempYValueArray addObject:[NSString stringWithFormat:@"%@",[[yourStats objectAtIndex:j] valueForKey:chartTitelName]]];
+                      }else{
+                          [tempYValueArray addObject:@"0"];
+                      }
+                  }
+                   NSLog(@"temp YValueArray = %@",tempYValueArray);
+                  for(int i=0;i< [tempXLabelArray count]; i++){
+                      NSCountedSet *countedSet = [[NSCountedSet alloc] initWithArray:tempXLabelArray];
+                      int cnt=(int)[countedSet countForObject:[tempXLabelArray objectAtIndex:i]];
+                      NSNumber *countNumber= [NSNumber numberWithInt:cnt];
+                      [xLabelCountArray addObject:countNumber];
+                      i=i+cnt-1;
+                  }
+
+                   NSMutableArray *arr=[[NSMutableArray alloc] init];
+                  for (int i=0; i<[xLabelCountArray count];i++) {
+                      
+                      int sumValue=0;
+                      
+                      for (int j=0; j< [[xLabelCountArray objectAtIndex:i] intValue]; j++) {
+                          sumValue=sumValue+[[tempYValueArray objectAtIndex:j] intValue];
+                      }
+                      [arr addObject:[NSString stringWithFormat:@"%d",(sumValue/[[xLabelCountArray objectAtIndex:i] intValue])]];
+                  }
+                  [yValueArray addObject:[[NSArray arrayWithArray:arr] copy]];
+                  NSLog(@"YValueArray = %@",yValueArray);
                   [self loadChartView];
                   [self RemoveLoadingView];
               }else {
@@ -75,24 +124,23 @@
      }
 }
 
-
+#pragma mark - Date Converter
 -(NSString *)dateToStringConvertion :(NSDate *)dateString{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    [dateFormatter setDateFormat:@"MMM-yy"];
     NSString *stringDate = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:dateString]];
-    NSLog(@"%@", stringDate);
-    
     return stringDate;
 }
+
 #pragma mark - @required
-//Array abscissa title
+#pragma mark -Array abscissa title
 - (NSArray *)UUChart_xLableArray:(UUChart *)chart
 {
     NSArray *array1 = [[NSArray arrayWithArray:xLableArray] copy];
     return array1;
 }
 
-//Numerical jagged array
+#pragma mark -Numerical jagged array
 - (NSArray *)UUChart_yValueArray:(UUChart *)chart
 {
     NSArray *array = [[NSArray arrayWithArray:yValueArray] copy];
@@ -101,40 +149,161 @@
 }
 
 #pragma mark - @optional
-//An array of colors
+#pragma mark -An array of colors
 - (NSArray *)UUChart_ColorArray:(UUChart *)chart
 {
-    return @[UURed,UUBrown,UUGreen,UUYellow,UUBlack,UUBlue,UUDarkYellow,UUGrey,UUFreshGreen,UUStarYellow,UUDeepGrey,UUButtonGrey,UUWeiboColor,UUPinkGrey,UULightBlue,UUBrown];
+    return @[UURed];
 }
-//Display Value range
+
+#pragma mark -Display Value range
 - (CGRange)UUChartChooseRangeInLineChart:(UUChart *)chart
 {
-//    return CGRangeMake(60, 0);
     return CGRangeZero;
 }
 
 #pragma mark - Exclusive features a line graph
-//Label value region
+#pragma mark -Label value region
 - (CGRange)UUChartMarkRangeInLineChart:(UUChart *)chart
 {
     return CGRangeZero;
 }
 
-//Analyzing display horizontal lines
+#pragma mark -Analyzing display horizontal lines
 - (BOOL)UUChart:(UUChart *)chart ShowHorizonLineAtIndex:(NSInteger)index
 {
     return YES;
 }
 
-//Analyzing display maximum and minimum
+#pragma mark -Analyzing display maximum and minimum
 - (BOOL)UUChart:(UUChart *)chart ShowMaxMinAtIndex:(NSInteger)index
 {
     return NO;
 }
-//
 
-#pragma mark-
-#pragma mark Loading
+#pragma mark - UITableView  Row height
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        return 30;
+    }else{
+        return 50;
+    }
+    
+}
+
+#pragma mark - UITableView  number of section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+#pragma mark - UITableView  number of rows
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return [arrayOfTitel count];
+}
+
+#pragma mark - UITableView Cell Creation
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *MyIdentifier = @"MyIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:MyIdentifier] ;
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+    }else{
+        cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+    }
+    
+    cell.textLabel.textAlignment=NSTextAlignmentCenter;
+    int row=indexPath.row;
+    NSNumber* rowValue = [NSNumber numberWithInt:row];
+    if(cellSelectedArray.count==0){
+        [cell setBackgroundColor:NotSelectedCellBGColor];
+        cell.textLabel.textColor=SelectedCellBGColor;
+    }else{
+        for(NSNumber *i in cellSelectedArray)
+        {
+            
+            if([i isEqualToNumber:rowValue])
+            {
+                [cell setBackgroundColor:SelectedCellBGColor];
+                cell.textLabel.textColor=NotSelectedCellBGColor;
+            }else{
+                [cell setBackgroundColor:NotSelectedCellBGColor];
+                cell.textLabel.textColor=SelectedCellBGColor;
+            }
+        }
+    }
+    cell.textLabel.text = [[arrayOfTitel objectAtIndex:indexPath.row] uppercaseString];
+    return cell;
+}
+
+#pragma mark - UITableView Cell Seperator full width
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if ([self.chartListTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.chartListTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.chartListTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.chartListTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+#pragma mark - UITableView Cell Selection
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+   
+ NSLog(@"Select Indexpath.row=%ld",(long)indexPath.row);
+    int row=indexPath.row;
+    NSNumber* rowValue = [NSNumber numberWithInt:row];
+    if(cellSelectedArray.count==0){
+         [cellSelectedArray addObject:rowValue];
+    }else{
+        if(![cellSelectedArray containsObject:rowValue]){
+            [cellSelectedArray removeAllObjects];
+            [cellSelectedArray addObject:rowValue];
+        }
+    }
+   
+    [[tableView cellForRowAtIndexPath:indexPath] setBackgroundColor:SelectedCellBGColor];
+    [tableView cellForRowAtIndexPath:indexPath].textLabel.textColor=NotSelectedCellBGColor;
+    self.lblLineChart.text=[[arrayOfTitel objectAtIndex:indexPath.row] uppercaseString];
+    [self loadParse:[arrayOfTitel objectAtIndex:indexPath.row]];
+    [UIView animateWithDuration:0.5 animations:^{
+                self.chartListTableView.alpha=0.0;
+    }];
+    isShown = false;
+}
+
+#pragma mark - UITableView Cell Delselection
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"Deselect Indexpath.row=%ld",(long)indexPath.row);
+    [[tableView cellForRowAtIndexPath:indexPath] setBackgroundColor:NotSelectedCellBGColor];
+    [tableView cellForRowAtIndexPath:indexPath].textLabel.textColor=SelectedCellBGColor;
+   
+}
+
+#pragma mark - Loading
 -(void)AddLoadingView
 {
     loadingBackground = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 150, 70)];
@@ -163,5 +332,24 @@
     [indicator removeFromSuperview];
     [loadingText removeFromSuperview];
     self.view.userInteractionEnabled=YES;
+}
+
+#pragma mark - Drop Down Menu Show
+- (IBAction)btnLineChartAction:(id)sender {
+    
+    if (!isShown) {
+        [UIView animateWithDuration:0.5  animations:^{
+            self.chartListTableView.alpha=1.0;
+        }];
+        isShown = true;
+    } else {
+        [UIView animateWithDuration:0.5  animations:^{
+            self.chartListTableView.alpha=0.0;
+        }];
+        isShown = false;
+    }
+    
+
+    
 }
 @end
