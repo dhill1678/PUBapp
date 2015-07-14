@@ -5,6 +5,7 @@
 //  Created by Samrat on 30/06/15.
 //  Copyright (c) 2015 AppMuumba. All rights reserved.
 //
+#import "AppDelegate.h"
 #import "ChartScreen.h"
 
 
@@ -13,7 +14,7 @@
 @end
 
 @implementation ChartScreen
-
+AppDelegate *appDelegate;
 - (void)viewDidLoad {
     [super viewDidLoad];
     cellSelectedArray=[[NSMutableArray alloc] init];
@@ -46,18 +47,61 @@
     NSLog(@"Array count =%d",arrayCount);
     NSLog(@"Arr count =%lu",(unsigned long)[arr count]);
     CGFloat width = CGRectGetWidth(self.view.bounds);
-    if(70*[arr count] > width){
-         _showChartScrollView.contentSize=CGSizeMake((70*[arr count]), _showChartScrollView.frame.size.height);
+    if(60*[arr count] > width-20){
+         _showChartScrollView.contentSize=CGSizeMake((60*[arr count]), _showChartScrollView.frame.size.height);
     }else{
-         _showChartScrollView.contentSize=CGSizeMake(width, _showChartScrollView.frame.size.height);
+         _showChartScrollView.contentSize=CGSizeMake(width-30, _showChartScrollView.frame.size.height);
     }
+     NSLog(@"_showChartScrollView contentSize= %@",NSStringFromCGSize(_showChartScrollView.contentSize));
     if(chartView!=nil){
         [chartView removeFromView];
     }
-    chartView = [[UUChart alloc]initwithUUChartDataFrame:CGRectMake(10, 10, _showChartScrollView.contentSize.width -20, _showChartScrollView.contentSize.height-20)
+    chartView = [[UUChart alloc]initwithUUChartDataFrame:CGRectMake(0, 10, _showChartScrollView.contentSize.width -10, _showChartScrollView.contentSize.height-20)
                                               withSource:self
                                                withStyle:UUChartLineStyle];
+    NSLog(@"chartView frame= %@",NSStringFromCGRect(chartView.frame));
     [chartView showInView:_showChartScrollView];
+    appDelegate=[UIApplication sharedApplication ].delegate;
+    NSLog(@"appDelegate.yChartLableArray =%@",appDelegate.yChartLableArray);
+    
+    UIView *sideView=[[UIView alloc] initWithFrame:CGRectMake(10, 10, 20, chartView.frame.size.height)];
+    sideView.backgroundColor=[UIColor whiteColor];
+    UILabel *lblOne=[[UILabel alloc] initWithFrame:CGRectMake(0, 423, 20, 10)];
+    lblOne.text=[appDelegate.yChartLableArray objectAtIndex:0];
+    [lblOne setTextAlignment:NSTextAlignmentRight];
+    [lblOne setFont:[UIFont boldSystemFontOfSize:9.0f]];
+    [lblOne setTextColor: UUDeepGrey];
+    [sideView addSubview:lblOne];
+    
+    UILabel *lblTwo=[[UILabel alloc] initWithFrame:CGRectMake(0, 318.5, 20, 10)];
+    lblTwo.text=[appDelegate.yChartLableArray objectAtIndex:1];
+    [lblTwo setFont:[UIFont boldSystemFontOfSize:9.0f]];
+    [lblTwo setTextAlignment:NSTextAlignmentRight];
+    [lblTwo setTextColor: UUDeepGrey];
+    [sideView addSubview:lblTwo];
+    
+    UILabel *lblThree=[[UILabel alloc] initWithFrame:CGRectMake(0, 214, 20, 10)];
+    lblThree.text=[appDelegate.yChartLableArray objectAtIndex:2];
+    [lblThree setFont:[UIFont boldSystemFontOfSize:9.0f]];
+    [lblThree setTextAlignment:NSTextAlignmentRight];
+    [lblThree setTextColor: UUDeepGrey];
+    [sideView addSubview:lblThree];
+    
+    UILabel *lblFour=[[UILabel alloc] initWithFrame:CGRectMake(0, 109.5, 20, 10)];
+    lblFour.text=[appDelegate.yChartLableArray objectAtIndex:3];
+    [lblFour setFont:[UIFont boldSystemFontOfSize:9.0f]];
+    [lblFour setTextAlignment:NSTextAlignmentRight];
+    [lblFour setTextColor: UUDeepGrey];
+    [sideView addSubview:lblFour];
+    
+    UILabel *lblFive=[[UILabel alloc] initWithFrame:CGRectMake(0, 5, 20, 10)];
+    lblFive.text=[appDelegate.yChartLableArray objectAtIndex:4];
+    [lblFive setFont:[UIFont boldSystemFontOfSize:9.0f]];
+    [lblFive setTextAlignment:NSTextAlignmentRight];
+    [lblFive setTextColor: UUDeepGrey];
+    [sideView addSubview:lblFive];
+    
+    [self.yLabelView addSubview:sideView];
 }
 
 #pragma mark - Parse Load
@@ -66,6 +110,8 @@
          [self AddLoadingView];
          PFQuery *query = [PFQuery queryWithClassName:PF_GAME_CLASS_NAME];
          [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
+//         [query whereKey:@"user"
+//                 equalTo:[PFObject objectWithoutDataWithClassName:PF_USER_CLASS_NAME objectId:@"4hmtjrWSeA"]];
          [query orderByDescending:@"createdAt"];
          [query setLimit:1000];
          [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
@@ -103,12 +149,14 @@
                   }
 
                    NSMutableArray *arr=[[NSMutableArray alloc] init];
+                  int arrayCount=0;
                   for (int i=0; i<[xLabelCountArray count];i++) {
                       
                       int sumValue=0;
                       
                       for (int j=0; j< [[xLabelCountArray objectAtIndex:i] intValue]; j++) {
-                          sumValue=sumValue+[[tempYValueArray objectAtIndex:j] intValue];
+                          sumValue=sumValue+[[tempYValueArray objectAtIndex:arrayCount] intValue];
+                          arrayCount++;
                       }
                       [arr addObject:[NSString stringWithFormat:@"%d",(sumValue/[[xLabelCountArray objectAtIndex:i] intValue])]];
                   }

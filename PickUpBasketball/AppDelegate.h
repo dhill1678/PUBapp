@@ -15,7 +15,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) ChatsVC *messages;
-
+@property (nonatomic,retain) NSMutableArray *yChartLableArray;
 
 @end
 

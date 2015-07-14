@@ -33,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *chartListTableView;
 @property (strong, nonatomic) IBOutlet UILabel *lblLineChart;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowImageView;
+@property (strong, nonatomic) IBOutlet UIView *yLabelView;
 - (IBAction)btnLineChartAction:(id)sender;
 
 

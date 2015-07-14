@@ -5,13 +5,13 @@
 //  Created by shake on 14-7-24.
 //  Copyright (c) 2014年 uyiuyao. All rights reserved.
 //
-
+#import "AppDelegate.h"
 #import "UULineChart.h"
 #import "UUColor.h"
 #import "UUChartLabel.h"
 
 @implementation UULineChart
-
+AppDelegate *appDelegate;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -19,6 +19,8 @@
         // Initialization code
         self.clipsToBounds = YES;
     }
+    appDelegate=[UIApplication sharedApplication ].delegate;
+    appDelegate.yChartLableArray=[[NSMutableArray alloc] init];
     return self;
 }
 
@@ -46,8 +48,8 @@
              }
          }
     }
-    if (max < 5) {
-        max = 5;
+    if (max < 4) {
+        max = 4;
     }
     if (self.showRange) {
         _yValueMin = min;
@@ -55,6 +57,8 @@
         _yValueMin = 0;
     }
     _yValueMax = (int)max;
+//    _yValueMax = (int)max + (4-((int)max%4));
+//    NSLog(@"_yValueMax===>%f",_yValueMax);
     
     if (_chooseRange.max!=_chooseRange.min) {
         _yValueMax = _chooseRange.max;
@@ -68,10 +72,12 @@
     for (int i=0; i<5; i++) {
         UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(0.0,chartCavanHeight-i*levelHeight+5, UUYLabelwidth, UULabelHeight)];
 		label.text = [NSString stringWithFormat:@"%d",(int)(level * i+_yValueMin)];
-		[self addSubview:label];
+        [appDelegate.yChartLableArray addObject:[NSString stringWithFormat:@"%@",label.text]];
+//		[self addSubview:label];
     }
     if ([super respondsToSelector:@selector(setMarkRange:)]) {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(UUYLabelwidth, (1-(_markRange.max-_yValueMin)/(_yValueMax-_yValueMin))*chartCavanHeight+UULabelHeight, self.frame.size.width-UUYLabelwidth, (_markRange.max-_markRange.min)/(_yValueMax-_yValueMin)*chartCavanHeight)];
+//        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(UUYLabelwidth, (1-(_markRange.max-_yValueMin)/(_yValueMax-_yValueMin))*chartCavanHeight+UULabelHeight, self.frame.size.width-UUYLabelwidth, (_markRange.max-_markRange.min)/(_yValueMax-_yValueMin)*chartCavanHeight)];
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, (1-(_markRange.max-_yValueMin)/(_yValueMax-_yValueMin))*chartCavanHeight+UULabelHeight, self.frame.size.width-UUYLabelwidth, (_markRange.max-_markRange.min)/(_yValueMax-_yValueMin)*chartCavanHeight)];
         view.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.1];
         [self addSubview:view];
     }
@@ -109,8 +115,10 @@
     
     for (int i=0; i<xLabels.count; i++) {
         NSString *labelText = xLabels[i];
-        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(i * _xLabelWidth+UUYLabelwidth, self.frame.size.height - UULabelHeight, _xLabelWidth, UULabelHeight)];
+//        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(i * _xLabelWidth+UUYLabelwidth, self.frame.size.height - UULabelHeight, _xLabelWidth, UULabelHeight)];
+        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(i * _xLabelWidth+15, self.frame.size.height - UULabelHeight, _xLabelWidth, UULabelHeight)];
         label.text = labelText;
+        label.textAlignment=NSTextAlignmentLeft;
         [self addSubview:label];
     }
     
@@ -185,7 +193,8 @@
             
             UIBezierPath *progressline = [UIBezierPath bezierPath];
             CGFloat firstValue = [[childAry objectAtIndex:0] floatValue];
-            CGFloat xPosition = (UUYLabelwidth + _xLabelWidth/2.0);
+//            CGFloat xPosition = (UUYLabelwidth + _xLabelWidth/2.0);
+            CGFloat xPosition = UUYLabelwidth;
             CGFloat chartCavanHeight = self.frame.size.height - UULabelHeight*3;
             
             float grade = ((float)firstValue-_yValueMin) / ((float)_yValueMax-_yValueMin);
