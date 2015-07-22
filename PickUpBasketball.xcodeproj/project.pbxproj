@@ -172,6 +172,7 @@
 		3CD04F741ADB7FB6001F8018 /* freethrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04F731ADB7FB6001F8018 /* freethrows.png */; };
 		3CD04F761ADB7FC5001F8018 /* heatcheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04F751ADB7FC5001F8018 /* heatcheck.png */; };
 		3CD04F781ADB7FD2001F8018 /* shotchart.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD04F771ADB7FD2001F8018 /* shotchart.png */; };
+		7E46A1B31B54EA48008D4FC8 /* AveragesScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E46A1B21B54EA48008D4FC8 /* AveragesScreen.m */; };
 		7E4E83401B391FB100AE1D9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4E833F1B391FB100AE1D9F /* FacebookSDK.framework */; };
 		7E4E83411B391FE400AE1D9F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B25A97E003C2B30 /* Parse.framework */; };
 		7E9A816E1B43C04B003CFB3D /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81631B43C04B003CFB3D /* UUChart.m */; };
@@ -180,12 +181,13 @@
 		7E9A81711B43C04B003CFB3D /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81691B43C04B003CFB3D /* UULineChart.m */; };
 		7E9A81721B43C04B003CFB3D /* UUBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A816B1B43C04B003CFB3D /* UUBar.m */; };
 		7E9A81731B43C04B003CFB3D /* UUBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A816C1B43C04B003CFB3D /* UUBarChart.m */; };
+		7EA595BC1B5F596E00A30C5D /* ChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA595B91B5F596E00A30C5D /* ChartCell.m */; };
+		7EA595BD1B5F596E00A30C5D /* ChartScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA595BB1B5F596E00A30C5D /* ChartScreen.m */; };
 		7EAB6EC61B4BA7660056B680 /* downArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EAB6EC51B4BA7660056B680 /* downArrow.png */; };
 		7EAB6ECA1B4BCF0A0056B680 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EAB6EC91B4BCF0A0056B680 /* Common.m */; };
 		7EDC0B201B37FB070009BF38 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C91B25A992003C2B30 /* ParseUI.framework */; };
 		7EDC0B211B37FB070009BF38 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */; };
 		7EDC0B271B381DBB0009BF38 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDC0B261B381DBB0009BF38 /* Bolts.framework */; };
-		7EFE3DC01B42D098001D1BB8 /* ChartScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE3DBF1B42D098001D1BB8 /* ChartScreen.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -500,6 +502,8 @@
 		3CD04F731ADB7FB6001F8018 /* freethrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = freethrows.png; sourceTree = "<group>"; };
 		3CD04F751ADB7FC5001F8018 /* heatcheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heatcheck.png; sourceTree = "<group>"; };
 		3CD04F771ADB7FD2001F8018 /* shotchart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shotchart.png; sourceTree = "<group>"; };
+		7E46A1B11B54EA48008D4FC8 /* AveragesScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AveragesScreen.h; sourceTree = "<group>"; };
+		7E46A1B21B54EA48008D4FC8 /* AveragesScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AveragesScreen.m; sourceTree = "<group>"; };
 		7E4E833F1B391FB100AE1D9F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = pickupbasketball/Library/FacebookSDK.framework; sourceTree = "<group>"; };
 		7E87C5C51B25A97E003C2B30 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = pickupbasketball/Library/Parse.framework; sourceTree = "<group>"; };
 		7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = pickupbasketball/Library/ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -516,12 +520,14 @@
 		7E9A816B1B43C04B003CFB3D /* UUBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBar.m; sourceTree = "<group>"; };
 		7E9A816C1B43C04B003CFB3D /* UUBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUBarChart.m; sourceTree = "<group>"; };
 		7E9A816D1B43C04B003CFB3D /* UUBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUBar.h; sourceTree = "<group>"; };
+		7EA595B81B5F596E00A30C5D /* ChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCell.h; sourceTree = "<group>"; };
+		7EA595B91B5F596E00A30C5D /* ChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCell.m; sourceTree = "<group>"; };
+		7EA595BA1B5F596E00A30C5D /* ChartScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartScreen.h; sourceTree = "<group>"; };
+		7EA595BB1B5F596E00A30C5D /* ChartScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartScreen.m; sourceTree = "<group>"; };
 		7EAB6EC51B4BA7660056B680 /* downArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = downArrow.png; path = pickupbasketball/downArrow.png; sourceTree = SOURCE_ROOT; };
 		7EAB6EC81B4BCF0A0056B680 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = pickupbasketball/Common.h; sourceTree = SOURCE_ROOT; };
 		7EAB6EC91B4BCF0A0056B680 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Common.m; path = pickupbasketball/Common.m; sourceTree = SOURCE_ROOT; };
 		7EDC0B261B381DBB0009BF38 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = pickupbasketball/Library/Bolts.framework; sourceTree = "<group>"; };
-		7EFE3DBE1B42D098001D1BB8 /* ChartScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartScreen.h; sourceTree = "<group>"; };
-		7EFE3DBF1B42D098001D1BB8 /* ChartScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartScreen.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1094,8 +1100,9 @@
 		3CACB5001AAC11D700D64D09 /* PickUpBasketball */ = {
 			isa = PBXGroup;
 			children = (
+				7EA595B61B5F596E00A30C5D /* Chart */,
+				7E46A1AA1B54E9CA008D4FC8 /* Averages */,
 				7EAB6EC71B4BCEEC0056B680 /* Common */,
-				7EFE3DBD1B42D078001D1BB8 /* Chart */,
 				7EFE3DB91B42C727001D1BB8 /* ChartLibrary */,
 				3C5473141AAE40F8007B541F /* Configs.h */,
 				3CACB5051AAC11D800D64D09 /* AppDelegate.h */,
@@ -1282,6 +1289,36 @@
 			name = IQDropDownTextField;
 			sourceTree = "<group>";
 		};
+		7E46A1AA1B54E9CA008D4FC8 /* Averages */ = {
+			isa = PBXGroup;
+			children = (
+				7E46A1B11B54EA48008D4FC8 /* AveragesScreen.h */,
+				7E46A1B21B54EA48008D4FC8 /* AveragesScreen.m */,
+			);
+			name = Averages;
+			path = pickupbasketball/Averages;
+			sourceTree = SOURCE_ROOT;
+		};
+		7EA595B61B5F596E00A30C5D /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				7EA595B71B5F596E00A30C5D /* ChartCell */,
+				7EA595BA1B5F596E00A30C5D /* ChartScreen.h */,
+				7EA595BB1B5F596E00A30C5D /* ChartScreen.m */,
+			);
+			name = Chart;
+			path = pickupbasketball/Chart;
+			sourceTree = SOURCE_ROOT;
+		};
+		7EA595B71B5F596E00A30C5D /* ChartCell */ = {
+			isa = PBXGroup;
+			children = (
+				7EA595B81B5F596E00A30C5D /* ChartCell.h */,
+				7EA595B91B5F596E00A30C5D /* ChartCell.m */,
+			);
+			path = ChartCell;
+			sourceTree = "<group>";
+		};
 		7EAB6DAA1B4BA7320056B680 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1317,16 +1354,6 @@
 			);
 			name = ChartLibrary;
 			path = pickupbasketball/ChartLibrary;
-			sourceTree = SOURCE_ROOT;
-		};
-		7EFE3DBD1B42D078001D1BB8 /* Chart */ = {
-			isa = PBXGroup;
-			children = (
-				7EFE3DBE1B42D098001D1BB8 /* ChartScreen.h */,
-				7EFE3DBF1B42D098001D1BB8 /* ChartScreen.m */,
-			);
-			name = Chart;
-			path = pickupbasketball/Chart;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -1457,6 +1484,7 @@
 				3C5472E31AAC82F9007B541F /* REFrostedContainerViewController.m in Sources */,
 				3C54745A1AAE55F1007B541F /* UIImage+JSQMessages.m in Sources */,
 				3C5474631AAE55F1007B541F /* JSQMessagesToolbarButtonFactory.m in Sources */,
+				7E46A1B31B54EA48008D4FC8 /* AveragesScreen.m in Sources */,
 				7E9A81731B43C04B003CFB3D /* UUBarChart.m in Sources */,
 				3C5472E61AAC82F9007B541F /* UIView+REFrostedViewController.m in Sources */,
 				3C5474801AAE55F1007B541F /* MBProgressHUD.m in Sources */,
@@ -1467,7 +1495,6 @@
 				3C54744D1AAE55F1007B541F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				3C5474731AAE55F1007B541F /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				3CD04B5A1ADC36E200313E12 /* IQKeyboardReturnKeyHandler.m in Sources */,
-				7EFE3DC01B42D098001D1BB8 /* ChartScreen.m in Sources */,
 				3CD04B5B1ADC36E200313E12 /* IQNSArray+Sort.m in Sources */,
 				7E9A81701B43C04B003CFB3D /* UUColor.m in Sources */,
 				3C3214C71AEB657A004A989E /* UIView+XCMultiSortTableView.m in Sources */,
@@ -1480,6 +1507,7 @@
 				3CACB5071AAC11D800D64D09 /* AppDelegate.m in Sources */,
 				3C64A1AD1AB68A8900D002CC /* NewGameViewController.m in Sources */,
 				3C5473421AAE4ADD007B541F /* AboutVC.m in Sources */,
+				7EA595BC1B5F596E00A30C5D /* ChartCell.m in Sources */,
 				3C5472E71AAC82F9007B541F /* UIViewController+REFrostedViewController.m in Sources */,
 				7E9A816E1B43C04B003CFB3D /* UUChart.m in Sources */,
 				3C5474601AAE55F1007B541F /* JSQMessagesBubbleImageFactory.m in Sources */,
@@ -1491,6 +1519,7 @@
 				3C3214C91AEB657A004A989E /* XCMultiSortTableViewBGScrollView.m in Sources */,
 				7E9A816F1B43C04B003CFB3D /* UUChartLabel.m in Sources */,
 				3C3214C81AEB657A004A989E /* XCMultiSortTableView.m in Sources */,
+				7EA595BD1B5F596E00A30C5D /* ChartScreen.m in Sources */,
 				3C5473111AAE406D007B541F /* LoginVC.m in Sources */,
 				7E9A81721B43C04B003CFB3D /* UUBar.m in Sources */,
 				3C54746F1AAE55F1007B541F /* JSQMessagesCollectionView.m in Sources */,

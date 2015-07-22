@@ -42,16 +42,18 @@
     NSMutableArray *leftTableData;
     NSMutableArray *rightTableData;
 }
-
+NSNumber* rowNumber;
+NSIndexPath *selectedIndexPath;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
     // initialize arrays
+    self.pickerBGView.alpha=0.0;
+    self.filterTableView.alpha=0.0;
     yourStats = [[NSMutableArray alloc] init];
     [self initData];
-    [self loadParse];
+    [self loadParse:@"all"];
     NSLog(@"Your Stats: %@",yourStats);
     NSLog(@"Your Stats Count: %lu",(unsigned long)yourStats.count);
     
@@ -66,109 +68,215 @@
 
 - (void)initData {
     //Samrat
+    teamSizeArray=[[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil];
     headData =[[NSMutableArray alloc] initWithObjects:@"type",@"seasonid",@"win",@"yourscore",@"oponentscore",@"twoptmade",@"twoattempted",@"threeptmade",@"threeptattempted",@"freethrowmade",@"freethrowattempted",@"assists",@"totalrebounds",@"defrebounds",@"offrebounds",@"steals",@"blocks",@"turnovers",@"gamewinner",@"scoringstyle",@"teamsize",@"fullcourt",nil];
     
+    filteredTitelArray=[[NSMutableArray alloc] initWithObjects:@"All",@"Season",@"Pickup",@"Wins",@"Losses",@"Season ID",@"Team Size",@"Full Court",@"Not Full Cort",nil];
+    
+    filteredKeyArray=[[NSMutableArray alloc] initWithObjects:@"all",@"type,Season",@"type,Pickup",@"win,YES",@"win,NO",@"seasonid,seasonid",@"teamsize,teamsize",@"fullcourt,YES",@"fullcourt,NO",nil];
+    cellSelectedArray=[[NSMutableArray alloc] init];
+    SelectedCellBGColor = [UIColor colorWithRed:0.0f/255.0f green:31.0f/255.0f blue:112.0f/255.0f alpha:1.0f];
+    NotSelectedCellBGColor =[UIColor colorWithRed:115.0f/255.0f green:153.0f/255.0f blue:198.0f/255.0f alpha:1.0f];
     leftTableData=[[NSMutableArray alloc] init];
     rightTableData = [[NSMutableArray alloc] init];
-    //
-//    headData = [NSMutableArray arrayWithCapacity:10];
-//    [headData addObject:@"one"];
-//    [headData addObject:@"Two"];
-//    [headData addObject:@"Three"];
-//    [headData addObject:@"Four"];
-//    [headData addObject:@"Five"];
-    
-//    leftTableData = [NSMutableArray arrayWithCapacity:10];
-//    NSMutableArray *one = [NSMutableArray arrayWithCapacity:10];
-//    for (int i = 0; i < 3; i++) {
-//        [one addObject:[NSString stringWithFormat:@"Let's See - %d", i]];
-//    }
-//    [leftTableData addObject:one];
-//    NSMutableArray *two = [NSMutableArray arrayWithCapacity:10];
-//    for (int i = 3; i < 10; i++) {
-//        [two addObject:[NSString stringWithFormat:@"ki-%d", i]];
-//    }
-//    [leftTableData addObject:two];
-//    rightTableData = [NSMutableArray arrayWithCapacity:10];
-//    
-//    NSMutableArray *oneR = [NSMutableArray arrayWithCapacity:10];
-//    for (int i = 0; i < 3; i++) {
-//        NSMutableArray *ary = [NSMutableArray arrayWithCapacity:10];
-//        for (int j = 0; j < 5; j++) {
-//            if (j == 1) {
-////                [ary addObject:[NSNumber numberWithInt:random() % 5]];
-//                 [ary addObject:[NSNumber numberWithInt:2]];
-//            }else if (j == 2) {
-////                [ary addObject:[NSNumber numberWithInt:random() % 10]];
-//                [ary addObject:[NSNumber numberWithInt:3]];
-//            }
-//            else {
-//                [ary addObject:[NSString stringWithFormat:@"column %d %d", i, j]];
-//            }
-//        }
-//        [oneR addObject:ary];
-//    }
-//    [rightTableData addObject:oneR];
-//    
-//    NSMutableArray *twoR = [NSMutableArray arrayWithCapacity:10];
-//    for (int i = 3; i < 10; i++) {
-//        NSMutableArray *ary = [NSMutableArray arrayWithCapacity:10];
-//        for (int j = 0; j < 5; j++) {
-//            if (j == 1) {
-////                [ary addObject:[NSNumber numberWithInt:random() % 5]];
-//                [ary addObject:[NSNumber numberWithInt:1]];
-//            }else if (j == 2) {
-////                [ary addObject:[NSNumber numberWithInt:random() % 5]];
-//                [ary addObject:[NSNumber numberWithInt:4]];
-//            }else {
-//                [ary addObject:[NSString stringWithFormat:@"column %d %d", i, j]];
-//            }
-//        }
-//        [twoR addObject:ary];
-//    }
-//    [rightTableData addObject:twoR];
-    
-    /*
-    NSLog(@"%@",oneR);
-    NSLog(@"%@",twoR);
-    NSLog(@"%@",one);
-    NSLog(@"%@",two);
-    NSLog(@"%@",leftTableData);
-    NSLog(@"%@",rightTableData);
-    NSLog(@"%@",headData);
-     */
+    rowNumber=[NSNumber numberWithInt:0];
+    [cellSelectedArray addObject:rowNumber];
+    selectedIndexPath=0;
+}
+#pragma mark - Select First Row as default in UITableView
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self.filterTableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
 }
 
-- (void)loadParse {
+#pragma mark - UITableView Datasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  if(tableView==self.filterTableView){
+        return 1;
+    }else{
+        return 0;
+    }
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+   if(tableView==self.filterTableView){
+        return [filteredTitelArray count];
+    }else{
+        return 0;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(tableView==self.filterTableView){
+        
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier] ;
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+        }else{
+            cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+        }
+        
+        cell.textLabel.textAlignment=NSTextAlignmentCenter;
+        int row=(int)indexPath.row;
+        NSNumber* rowValue = [NSNumber numberWithInt:row];
+        if(cellSelectedArray.count==0){
+            [cell setBackgroundColor:NotSelectedCellBGColor];
+            cell.textLabel.textColor=SelectedCellBGColor;
+        }else{
+            for(NSNumber *i in cellSelectedArray)
+            {
+                
+                if([i isEqualToNumber:rowValue])
+                {
+                    [cell setBackgroundColor:SelectedCellBGColor];
+                    cell.textLabel.textColor=NotSelectedCellBGColor;
+                }else{
+                    [cell setBackgroundColor:NotSelectedCellBGColor];
+                    cell.textLabel.textColor=SelectedCellBGColor;
+                }
+            }
+        }
+        cell.textLabel.text = [[filteredTitelArray objectAtIndex:indexPath.row] uppercaseString];
+        return cell;
+    }else{
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+ if(tableView==self.filterTableView){
+        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+            return 30;
+        }else{
+            return 50;
+        }
+    }else{
+        return 0;
+    }
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0;
+}
+
+#pragma mark - UITableView Cell Seperator full width
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(tableView==self.filterTableView){
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+    }
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if ([self.filterTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.filterTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([self.filterTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.filterTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+#pragma mark - UITableView Cell Selection
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(tableView==self.filterTableView){
+        teamValue=@"";
+        selectedIndexPath=indexPath;
+        NSLog(@"Select Indexpath.row=%ld",(long)indexPath.row);
+        int row=(int)indexPath.row;
+        rowNumber = [NSNumber numberWithInt:row];
+        if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Team Size"]){
+            [UIView animateWithDuration:0.5  animations:^{
+                self.pickerBGView.alpha=1.0;
+            }];
+        }else{
+            [self loadParse:[filteredKeyArray objectAtIndex:indexPath.row]];
+        }
+//        if(cellSelectedArray.count==0){
+//            [cellSelectedArray addObject:rowNumber];
+//        }else{
+//            if(![cellSelectedArray containsObject:rowNumber]){
+//                [cellSelectedArray removeAllObjects];
+//                [cellSelectedArray addObject:rowNumber];
+//            }
+//        }
+//        [[self.filterTableView cellForRowAtIndexPath:selectedIndexPath] setBackgroundColor:SelectedCellBGColor];
+//        [self.filterTableView cellForRowAtIndexPath:selectedIndexPath].textLabel.textColor=NotSelectedCellBGColor;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.filterTableView.alpha=0.0;
+        }];
+        isShown = false;
+    }
+}
+
+#pragma mark - UITableView Cell Delselection
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(tableView==self.filterTableView){
+        NSLog(@"Deselect Indexpath.row=%ld",(long)indexPath.row);
+        [[tableView cellForRowAtIndexPath:indexPath] setBackgroundColor:NotSelectedCellBGColor];
+        [tableView cellForRowAtIndexPath:indexPath].textLabel.textColor=SelectedCellBGColor;
+    }
+}
+- (void)loadParse :(NSString *) keyType {
     if ([PFUser currentUser] != nil) {
         [self AddLoadingView];
         PFQuery *query = [PFQuery queryWithClassName:PF_GAME_CLASS_NAME];
-        [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
-        NSLog(@"Current User=%@ ",[PFUser currentUser]);
-        NSLog(@"PF_GAME_USER =%@ ",PF_GAME_USER);
-//        [query selectKeys:@[PF_GAME_TWOPTMADE, PF_GAME_TWOPTATTEMPTED]];
-        //[query includeKey:PF_GAME_TWOPTMADE]; // this doesn't work
+        if([keyType isEqualToString:@"all"]){
+            [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
+        }else{
+            NSArray* array = [keyType componentsSeparatedByString: @","];
+            NSString *keyString=[array objectAtIndex:0];
+            NSString *valueString=[array objectAtIndex:1];
+            if([keyString isEqualToString:@"seasonid"]){
+                [query whereKey:keyString notEqualTo:@""];
+            }else if([keyString isEqualToString:@"teamsize"]){
+                [query whereKey:keyString equalTo:teamValue];
+            }else{
+                if([valueString isEqualToString:@"NO"]){
+                    [query whereKey:keyString notEqualTo:@"YES"];
+                }else{
+                    [query whereKey:keyString equalTo:valueString];
+                }
+            }
+            [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
+        }
         [query orderByDescending:@"createdAt"];
         [query setLimit:1000];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
          {
              if (error == nil) {
-                 //[allObjects removeAllObjects];
-                 [yourStats removeAllObjects];
-                 [yourStats addObjectsFromArray:objects];
-                 NSLog(@"All Object: %@",yourStats);
-                 NSMutableArray *twoL=[[NSMutableArray alloc] init];
-                 for (int j=0;j<[yourStats count]; j++) {
-                      NSString *dateStr=[self dateToStringConvertion:[[yourStats objectAtIndex:j] valueForKey:@"createdAt"]];
-                     [twoL addObject:dateStr];
-                 }
-//                 NSSortDescriptor *sortDescriptor= [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
-//                 NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-//                 NSArray *sortedArray = [twoL sortedArrayUsingDescriptors:sortDescriptors];
-//                 NSLog(@"sortedArray=%@",sortedArray);
-                 [leftTableData removeAllObjects];
-                 [leftTableData addObject:twoL];
-                 
+                 if([objects count]>0){
+                     //[allObjects removeAllObjects];
+                     [yourStats removeAllObjects];
+                     [yourStats addObjectsFromArray:objects];
+                     NSLog(@"All Object: %@",yourStats);
+                     NSMutableArray *twoL=[[NSMutableArray alloc] init];
+                     for (int j=0;j<[yourStats count]; j++) {
+                         NSString *dateStr=[self dateToStringConvertion:[[yourStats objectAtIndex:j] valueForKey:@"createdAt"]];
+                         [twoL addObject:dateStr];
+                     }
+                     [leftTableData removeAllObjects];
+                     [leftTableData addObject:twoL];
+                     
                      NSMutableArray *twoR=[[NSMutableArray alloc] init];
                      for (int i=0;i<[yourStats count]; i++) {
                          NSMutableArray *ary = [[NSMutableArray alloc]init];
@@ -263,7 +371,7 @@
                              [ary addObject:@""];
                          }
                          if ([[yourStats objectAtIndex:i] objectForKey:@"gamewinner"]) {
-                              [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"gamewinner"]];
+                             [ary addObject:[[yourStats objectAtIndex:i] valueForKey:@"gamewinner"]];
                          }else{
                              [ary addObject:@""];
                          }
@@ -284,27 +392,35 @@
                          }
                          [twoR addObject:ary];
                      }
-                 [rightTableData removeAllObjects];
-                 [rightTableData addObject:twoR];
-                 NSLog(@"left array=%@",leftTableData);
-                 NSLog(@"right array=%@",rightTableData);
-//
-//                 //[_messagesTable reloadData];
-//                 //[self updateEmptyView];
-//                 //[self updateTabCounter];
-//                 NSLog(@"All Object: %@",yourStats);
-//                 NSLog(@"All Objects Count: %lu",(unsigned long)yourStats.count);
-//                 
-//                 for (NSObject *object in objects){
-//                     NSString *sports = [object valueForKey:@"SportName"];
-//                     NSLog(@"SportName =%@",sports);
-//                   //[sportsArray addObject:sports];
-//                 }
-                 tableView = [[XCMultiTableView alloc] initWithFrame:CGRectInset(self.view.bounds, 5.0f, 5.0f)];
-                 tableView.leftHeaderEnable = YES;
-                 tableView.datasource = self;
-                 [self.view addSubview:tableView];
-                  [self RemoveLoadingView];
+                     [rightTableData removeAllObjects];
+                     [rightTableData addObject:twoR];
+                     NSLog(@"left array=%@",leftTableData);
+                     NSLog(@"right array=%@",rightTableData);
+                     if(XCMtableView){
+                         [XCMtableView removeFromSuperview];
+                         XCMtableView = nil;
+                     }
+                     XCMtableView = [[XCMultiTableView alloc] initWithFrame:CGRectInset(self.view.bounds, 5.0f, 5.0f)];
+                     XCMtableView.leftHeaderEnable = YES;
+                     XCMtableView.datasource = self;
+                     [self.view addSubview:XCMtableView];
+                     [self.view bringSubviewToFront:self.filterTableView];
+                     [self.view bringSubviewToFront:self.pickerBGView];
+                     if(cellSelectedArray.count==0){
+                         [cellSelectedArray addObject:rowNumber];
+                     }else{
+                         if(![cellSelectedArray containsObject:rowNumber]){
+                             [cellSelectedArray removeAllObjects];
+                             [cellSelectedArray addObject:rowNumber];
+                         }
+                     }
+                     [[self.filterTableView cellForRowAtIndexPath:selectedIndexPath] setBackgroundColor:SelectedCellBGColor];
+                     [self.filterTableView cellForRowAtIndexPath:selectedIndexPath].textLabel.textColor=NotSelectedCellBGColor;
+                     [self RemoveLoadingView];
+                 }else{
+                     [self RemoveLoadingView];
+                     [ProgressHUD showError:@"No Stats To Show"];
+                 }
              } else {
                  [self RemoveLoadingView];
                  [ProgressHUD showError:@"No Stats To Show"];
@@ -345,7 +461,7 @@
 }
 
 
-- (NSUInteger)numberOfSectionsInTableView:(XCMultiTableView *)tableView {
+- (NSUInteger)numberOfSectionsInTableViews:(XCMultiTableView *)tableView {
     return [leftTableData count];
 }
 
@@ -375,9 +491,54 @@
 }
 
 - (IBAction)filter:(id)sender {
+    
+    [UIView animateWithDuration:0.5  animations:^{
+        self.pickerBGView.alpha=0.0;
+    }];
+    if (!isShown) {
+        [UIView animateWithDuration:0.5  animations:^{
+            self.filterTableView.alpha=1.0;
+        }];
+        isShown = true;
+    } else {
+        [UIView animateWithDuration:0.5  animations:^{
+            self.filterTableView.alpha=0.0;
+        }];
+        isShown = false;
+    }
+    
+//    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.filterTableView];
 //    NSLog(@"Your Stats: %@",yourStats);
 //    NSLog(@"Your Stats Count: %lu",(unsigned long)yourStats.count);
 //    NSLog(@"Your Stats 1: %@",yourStats[1]);
+}
+#pragma mark -
+#pragma mark PickerView DataSource
+
+- (NSInteger)numberOfComponentsInPickerView: (UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return teamSizeArray.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return teamSizeArray[row];
+}
+#pragma mark -
+#pragma mark PickerView Delegate
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+      inComponent:(NSInteger)component
+{
+    [UIView animateWithDuration:0.5  animations:^{
+        self.pickerBGView.alpha=0.0;
+    }];
+    teamValue=[NSString stringWithFormat:@"%@",[teamSizeArray objectAtIndex:row]];
+    [self loadParse:@"teamsize,teamsize"];
 }
 
 #pragma mark-

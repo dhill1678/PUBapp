@@ -16,6 +16,6 @@
 
 @property (strong, nonatomic) ChatsVC *messages;
 @property (nonatomic,retain) NSMutableArray *yChartLableArray;
-
+@property (nonatomic,retain) NSMutableArray *yChartLableFrameArray;
 @end
 

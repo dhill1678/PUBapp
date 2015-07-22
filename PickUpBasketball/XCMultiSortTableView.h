@@ -53,7 +53,7 @@ typedef NS_ENUM(NSUInteger, AlignHorizontalPosition) {
 - (NSArray *)arrayDataForContentInTableView:(XCMultiTableView *)tableView InSection:(NSUInteger)section;
 
 @optional
-- (NSUInteger)numberOfSectionsInTableView:(XCMultiTableView *)tableView;
+- (NSUInteger)numberOfSectionsInTableViews:(XCMultiTableView *)tableView;
 - (CGFloat)tableView:(XCMultiTableView *)tableView contentTableCellWidth:(NSUInteger)column;
 - (CGFloat)tableView:(XCMultiTableView *)tableView cellHeightInRow:(NSUInteger)row InSection:(NSUInteger)section;
 - (CGFloat)topHeaderHeightInTableView:(XCMultiTableView *)tableView;

@@ -29,15 +29,25 @@
 
 @interface SortableTableViewController : UIViewController
 {
-    XCMultiTableView *tableView;
+    XCMultiTableView *XCMtableView;
     
     //Samrat
     UIView *loadingBackground;
     UILabel *loadingText;
     UIActivityIndicatorView *indicator;
+    NSMutableArray *filteredTitelArray;
+    NSMutableArray *filteredKeyArray;
+    NSMutableArray *cellSelectedArray;
+    UIColor *SelectedCellBGColor;
+    UIColor *NotSelectedCellBGColor;
+    BOOL isShown;
+    NSMutableArray *teamSizeArray;
+    NSString *teamValue;
     //
 }
-
+@property (strong, nonatomic) IBOutlet UITableView *filterTableView;
+@property (strong, nonatomic) IBOutlet UIPickerView *teamSizePickerView;
+@property (strong, nonatomic) IBOutlet UIView *pickerBGView;
 - (IBAction)filter:(id)sender;
 
 @end

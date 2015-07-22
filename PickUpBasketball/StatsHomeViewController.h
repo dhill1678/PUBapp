@@ -10,11 +10,11 @@
 #import "REFrostedViewController.h"
 
 @interface StatsHomeViewController : UIViewController
-
 @property (strong, nonatomic) IBOutlet UIButton *GameLog;
-
 - (IBAction)showMenu;
 - (IBAction)GoGameLog:(id)sender;
+- (IBAction)GoChart:(id)sender;
+- (IBAction)GoAverages:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *Chart;
-
+- (IBAction)goAnalytics:(id)sender;
 @end

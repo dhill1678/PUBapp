@@ -41,4 +41,12 @@
      [self performSegueWithIdentifier:@"ChartScreen" sender:self];
 }
 
+- (IBAction)GoAverages:(id)sender {
+     [self performSegueWithIdentifier:@"AveragesScreen" sender:self];
+    
+}
+
+- (IBAction)goAnalytics:(id)sender {
+    [self performSegueWithIdentifier:@"AnalyticsScreen" sender:self];
+}
 @end

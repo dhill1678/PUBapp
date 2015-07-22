@@ -218,7 +218,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     if (datasource != datasource_) {
         datasource = datasource_;
         
-        responseToNumberSections = [datasource_ respondsToSelector:@selector(numberOfSectionsInTableView:)];
+        responseToNumberSections = [datasource_ respondsToSelector:@selector(numberOfSectionsInTableViews:)];
         responseContentTableCellWidth = [datasource_ respondsToSelector:@selector(tableView:contentTableCellWidth:)];
         responseNumberofContentColumns = [datasource_ respondsToSelector:@selector(arrayDataForTopHeaderInTableView:)];
         responseCellHeight = [datasource_ respondsToSelector:@selector(tableView:cellHeightInRow:InSection:)];
@@ -763,7 +763,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
 }
 
 - (NSUInteger)numberOfSections {
-    NSUInteger sections = responseToNumberSections ? [datasource numberOfSectionsInTableView:self] : 1;
+    NSUInteger sections = responseToNumberSections ? [datasource numberOfSectionsInTableViews:self] : 1;
     return sections < 1 ? 1 : sections;
 }
 
@@ -795,7 +795,7 @@ typedef NS_ENUM(NSUInteger, TableColumnSortType) {
     leftHeaderDataArray = [NSMutableArray array];
     contentDataArray = [NSMutableArray array];
     
-    NSUInteger sections = [datasource numberOfSectionsInTableView:self];
+    NSUInteger sections = [datasource numberOfSectionsInTableViews:self];
     for (int i = 0; i < sections; i++) {
         [leftHeaderDataArray addObject:[datasource arrayDataForLeftHeaderInTableView:self InSection:i]];
         [contentDataArray addObject:[datasource arrayDataForContentInTableView:self InSection:i]];

@@ -21,6 +21,7 @@ AppDelegate *appDelegate;
     }
     appDelegate=[UIApplication sharedApplication ].delegate;
     appDelegate.yChartLableArray=[[NSMutableArray alloc] init];
+    appDelegate.yChartLableFrameArray=[[NSMutableArray alloc] init];
     return self;
 }
 
@@ -56,9 +57,9 @@ AppDelegate *appDelegate;
     }else{
         _yValueMin = 0;
     }
-    _yValueMax = (int)max;
-//    _yValueMax = (int)max + (4-((int)max%4));
-//    NSLog(@"_yValueMax===>%f",_yValueMax);
+//    _yValueMax = (int)max;
+    _yValueMax = (int)max + (4-((int)max%4));
+    NSLog(@"_yValueMax===>%f",_yValueMax);
     
     if (_chooseRange.max!=_chooseRange.min) {
         _yValueMax = _chooseRange.max;
@@ -70,9 +71,10 @@ AppDelegate *appDelegate;
     CGFloat levelHeight = chartCavanHeight /4.0;
 
     for (int i=0; i<5; i++) {
-        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(0.0,chartCavanHeight-i*levelHeight+5, UUYLabelwidth, UULabelHeight)];
+        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(0.0,chartCavanHeight-i*levelHeight+5, 20, UULabelHeight)];//UUYLabelwidth
 		label.text = [NSString stringWithFormat:@"%d",(int)(level * i+_yValueMin)];
         [appDelegate.yChartLableArray addObject:[NSString stringWithFormat:@"%@",label.text]];
+        [appDelegate.yChartLableFrameArray addObject:[NSValue valueWithCGRect:label.frame]];
 //		[self addSubview:label];
     }
     if ([super respondsToSelector:@selector(setMarkRange:)]) {

@@ -1,40 +1,38 @@
 //
-//  ChartScreen.h
+//  AnalyticsScreen.h
 //  pickupbasketball
 //
-//  Created by Samrat on 30/06/15.
+//  Created by Samrat on 15/07/15.
 //  Copyright (c) 2015 AppMuumba. All rights reserved.
 //
-#import "Common.h"
-#import "Configs.h"
-#import "ProgressHUD.h"
-#import "UUChart.h"
-#import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
-@interface ChartScreen : UIViewController <UUChartDataSource>
+#import <UIKit/UIKit.h>
+
+@interface ChartScreen : UIViewController
 {
-    //for loading
     NSMutableArray *yourStats;
+    NSMutableArray *headData;
+    NSMutableArray *leftTableData;
+    NSMutableArray *rightTableData;
     UIView *loadingBackground;
     UILabel *loadingText;
     UIActivityIndicatorView *indicator;
-    //for chart
-    UUChart *chartView;
-    NSMutableArray *xLableArray;
-    NSMutableArray *yValueArray;
-    NSMutableArray *arrayOfTitel;
-    BOOL isShown;
-    
+    NSMutableArray *filteredTitelArray;
+    NSMutableArray *filteredKeyArray;
+    NSMutableArray *cellSelectedArray;
+    NSMutableArray *teamSizeArray;
     UIColor *SelectedCellBGColor;
     UIColor *NotSelectedCellBGColor;
-    NSMutableArray *cellSelectedArray;
+    BOOL isShown;
+    NSString *teamValue;
+
 }
-@property (strong, nonatomic) IBOutlet UIScrollView *showChartScrollView;
-@property (strong, nonatomic) IBOutlet UITableView *chartListTableView;
-@property (strong, nonatomic) IBOutlet UILabel *lblLineChart;
-@property (strong, nonatomic) IBOutlet UIImageView *arrowImageView;
-@property (strong, nonatomic) IBOutlet UIView *yLabelView;
-- (IBAction)btnLineChartAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *chartTableView;
+@property (strong, nonatomic) IBOutlet UITableView *filterTableView;
+- (IBAction)btnFilteredAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lblFilteredOutlet;
+@property (strong, nonatomic) IBOutlet UIView *pickerBGView;
+@property (strong, nonatomic) IBOutlet UIPickerView *teamSizePickerView;
 
 
 @end

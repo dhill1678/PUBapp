@@ -27,7 +27,7 @@
 @end
 
 @implementation AppDelegate
-@synthesize yChartLableArray;
+@synthesize yChartLableArray,yChartLableFrameArray;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     /* IMPORTANT: PASTE HERE YOUR APP AND CLIEMT ID's from your Parse account */
