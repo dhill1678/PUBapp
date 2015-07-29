@@ -8,7 +8,7 @@
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
 
-@interface ChartScreen : UIViewController
+@interface ChartScreen : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 {
     NSMutableArray *yourStats;
     NSMutableArray *headData;
@@ -21,10 +21,14 @@
     NSMutableArray *filteredKeyArray;
     NSMutableArray *cellSelectedArray;
     NSMutableArray *teamSizeArray;
+    NSMutableArray *seasonIdArray;
+    NSMutableArray *gameTypeArray;
     UIColor *SelectedCellBGColor;
     UIColor *NotSelectedCellBGColor;
     BOOL isShown;
     NSString *teamValue;
+    NSString *pickerViewSelection;
+    BOOL calculationStatus;
 
 }
 @property (strong, nonatomic) IBOutlet UITableView *chartTableView;
@@ -33,6 +37,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblFilteredOutlet;
 @property (strong, nonatomic) IBOutlet UIView *pickerBGView;
 @property (strong, nonatomic) IBOutlet UIPickerView *teamSizePickerView;
-
+- (IBAction)btnDonePickerViewAction:(id)sender;
+- (IBAction)btnToggleTotalAndAvarageAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnToggleTotalAndAverage;
 
 @end

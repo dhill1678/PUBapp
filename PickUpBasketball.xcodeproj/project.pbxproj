@@ -175,6 +175,7 @@
 		7E46A1B31B54EA48008D4FC8 /* AveragesScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E46A1B21B54EA48008D4FC8 /* AveragesScreen.m */; };
 		7E4E83401B391FB100AE1D9F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4E833F1B391FB100AE1D9F /* FacebookSDK.framework */; };
 		7E4E83411B391FE400AE1D9F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E87C5C51B25A97E003C2B30 /* Parse.framework */; };
+		7E8C8D241B67629C00A113DF /* AverageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C8D231B67629C00A113DF /* AverageCell.m */; };
 		7E9A816E1B43C04B003CFB3D /* UUChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81631B43C04B003CFB3D /* UUChart.m */; };
 		7E9A816F1B43C04B003CFB3D /* UUChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81651B43C04B003CFB3D /* UUChartLabel.m */; };
 		7E9A81701B43C04B003CFB3D /* UUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A81671B43C04B003CFB3D /* UUColor.m */; };
@@ -508,6 +509,8 @@
 		7E87C5C51B25A97E003C2B30 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = pickupbasketball/Library/Parse.framework; sourceTree = "<group>"; };
 		7E87C5C81B25A992003C2B30 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = pickupbasketball/Library/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		7E87C5C91B25A992003C2B30 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = pickupbasketball/Library/ParseUI.framework; sourceTree = "<group>"; };
+		7E8C8D221B67629C00A113DF /* AverageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AverageCell.h; sourceTree = "<group>"; };
+		7E8C8D231B67629C00A113DF /* AverageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AverageCell.m; sourceTree = "<group>"; };
 		7E9A81621B43C04B003CFB3D /* UUChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChart.h; sourceTree = "<group>"; };
 		7E9A81631B43C04B003CFB3D /* UUChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUChart.m; sourceTree = "<group>"; };
 		7E9A81641B43C04B003CFB3D /* UUChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChartLabel.h; sourceTree = "<group>"; };
@@ -1292,12 +1295,22 @@
 		7E46A1AA1B54E9CA008D4FC8 /* Averages */ = {
 			isa = PBXGroup;
 			children = (
+				7E8C8D211B67627400A113DF /* AverageCell */,
 				7E46A1B11B54EA48008D4FC8 /* AveragesScreen.h */,
 				7E46A1B21B54EA48008D4FC8 /* AveragesScreen.m */,
 			);
 			name = Averages;
 			path = pickupbasketball/Averages;
 			sourceTree = SOURCE_ROOT;
+		};
+		7E8C8D211B67627400A113DF /* AverageCell */ = {
+			isa = PBXGroup;
+			children = (
+				7E8C8D221B67629C00A113DF /* AverageCell.h */,
+				7E8C8D231B67629C00A113DF /* AverageCell.m */,
+			);
+			path = AverageCell;
+			sourceTree = "<group>";
 		};
 		7EA595B61B5F596E00A30C5D /* Chart */ = {
 			isa = PBXGroup;
@@ -1568,6 +1581,7 @@
 				3C54747F1AAE55F1007B541F /* JSQSystemSoundPlayer.m in Sources */,
 				3C5474431AAE55F1007B541F /* AFHTTPRequestOperation.m in Sources */,
 				3C54744B1AAE55F1007B541F /* AFURLSessionManager.m in Sources */,
+				7E8C8D241B67629C00A113DF /* AverageCell.m in Sources */,
 				3C5473341AAE4808007B541F /* ChatsVC.m in Sources */,
 				3CD04B5E1ADC36E200313E12 /* IQTitleBarButtonItem.m in Sources */,
 				3C5474781AAE55F1007B541F /* JSQMessagesLoadEarlierHeaderView.m in Sources */,

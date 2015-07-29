@@ -41,6 +41,7 @@ AppDelegate *appDelegate;
         chartView = [[UUChart alloc]initwithUUChartDataFrame:CGRectMake(0, 0, self.chatScrollView.contentSize.width, self.chatScrollView.contentSize.height)
                                                   withSource:self
                                                    withStyle:UUChartLineStyle];
+//        chartView.backgroundColor=[UIColor redColor];
         [chartView showInView:self.chatScrollView];
         appDelegate=[UIApplication sharedApplication ].delegate;
         NSLog(@"appDelegate.yChartLableArray =%@",appDelegate.yChartLableArray);

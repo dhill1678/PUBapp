@@ -71,7 +71,7 @@ AppDelegate *appDelegate;
     CGFloat levelHeight = chartCavanHeight /4.0;
 
     for (int i=0; i<5; i++) {
-        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(0.0,chartCavanHeight-i*levelHeight+5, 20, UULabelHeight)];//UUYLabelwidth
+        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(0.0,chartCavanHeight-i*levelHeight+5+10, 20, UULabelHeight)];//UUYLabelwidth
 		label.text = [NSString stringWithFormat:@"%d",(int)(level * i+_yValueMin)];
         [appDelegate.yChartLableArray addObject:[NSString stringWithFormat:@"%@",label.text]];
         [appDelegate.yChartLableFrameArray addObject:[NSValue valueWithCGRect:label.frame]];
@@ -90,8 +90,8 @@ AppDelegate *appDelegate;
             
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             UIBezierPath *path = [UIBezierPath bezierPath];
-            [path moveToPoint:CGPointMake(UUYLabelwidth,UULabelHeight+i*levelHeight)];
-            [path addLineToPoint:CGPointMake(self.frame.size.width,UULabelHeight+i*levelHeight)];
+            [path moveToPoint:CGPointMake(UUYLabelwidth,UULabelHeight+10+i*levelHeight)];
+            [path addLineToPoint:CGPointMake(self.frame.size.width,UULabelHeight+10+i*levelHeight)];
             [path closePath];
             shapeLayer.path = path.CGPath;
             shapeLayer.strokeColor = [[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor];
@@ -118,7 +118,7 @@ AppDelegate *appDelegate;
     for (int i=0; i<xLabels.count; i++) {
         NSString *labelText = xLabels[i];
 //        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(i * _xLabelWidth+UUYLabelwidth, self.frame.size.height - UULabelHeight, _xLabelWidth, UULabelHeight)];
-        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(i * _xLabelWidth+15, self.frame.size.height - UULabelHeight, _xLabelWidth, UULabelHeight)];
+        UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(i * _xLabelWidth+15, self.frame.size.height - UULabelHeight+2, _xLabelWidth, UULabelHeight)];
         label.text = labelText;
         label.textAlignment=NSTextAlignmentLeft;
         [self addSubview:label];
@@ -128,8 +128,8 @@ AppDelegate *appDelegate;
     for (int i=0; i<xLabels.count+1; i++) {
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         UIBezierPath *path = [UIBezierPath bezierPath];
-        [path moveToPoint:CGPointMake(UUYLabelwidth+i*_xLabelWidth,UULabelHeight)];
-        [path addLineToPoint:CGPointMake(UUYLabelwidth+i*_xLabelWidth,self.frame.size.height-2*UULabelHeight)];
+        [path moveToPoint:CGPointMake(UUYLabelwidth+i*_xLabelWidth,UULabelHeight+10)];
+        [path addLineToPoint:CGPointMake(UUYLabelwidth+i*_xLabelWidth,self.frame.size.height-2*UULabelHeight+10)];
         [path closePath];
         shapeLayer.path = path.CGPath;
         shapeLayer.strokeColor = [[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor];
@@ -210,13 +210,13 @@ AppDelegate *appDelegate;
                     isShowMaxAndMinPoint = YES;
                 }
             }
-            [self addPoint:CGPointMake(xPosition, chartCavanHeight - grade * chartCavanHeight+UULabelHeight)
+            [self addPoint:CGPointMake(xPosition, chartCavanHeight - grade * chartCavanHeight+UULabelHeight+10)
                      index:i
                     isShow:isShowMaxAndMinPoint
                      value:firstValue];
             
             
-            [progressline moveToPoint:CGPointMake(xPosition, chartCavanHeight - grade * chartCavanHeight+UULabelHeight)];
+            [progressline moveToPoint:CGPointMake(xPosition, chartCavanHeight - grade * chartCavanHeight+UULabelHeight+10)];
             [progressline setLineWidth:2.0];
             [progressline setLineCapStyle:kCGLineCapRound];
             [progressline setLineJoinStyle:kCGLineJoinRound];
@@ -226,7 +226,7 @@ AppDelegate *appDelegate;
                 float grade =([valueString floatValue]-_yValueMin) / ((float)_yValueMax-_yValueMin);
                 if (index != 0) {
                     
-                    CGPoint point = CGPointMake(xPosition+index*_xLabelWidth, chartCavanHeight - grade * chartCavanHeight+UULabelHeight);
+                    CGPoint point = CGPointMake(xPosition+index*_xLabelWidth, chartCavanHeight - grade * chartCavanHeight+UULabelHeight+10);
                     [progressline addLineToPoint:point];
                     
                     BOOL isShowMaxAndMinPoint = YES;
@@ -387,7 +387,8 @@ AppDelegate *appDelegate;
         label.font = [UIFont systemFontOfSize:10];
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = view.backgroundColor;
-        label.text = [NSString stringWithFormat:@"%d",(int)value];
+//        label.text = [NSString stringWithFormat:@"%d",(int)value];
+        label.text = [NSString stringWithFormat:@"%.2f",value];
         [self addSubview:label];
     }
     

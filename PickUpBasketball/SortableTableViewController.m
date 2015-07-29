@@ -67,14 +67,15 @@ NSIndexPath *selectedIndexPath;
 }
 
 - (void)initData {
-    //Samrat
     teamSizeArray=[[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil];
+    gameTypeArray=[[NSMutableArray alloc]initWithObjects:@"Season",@"Pickup", nil];
     headData =[[NSMutableArray alloc] initWithObjects:@"type",@"seasonid",@"win",@"yourscore",@"oponentscore",@"twoptmade",@"twoattempted",@"threeptmade",@"threeptattempted",@"freethrowmade",@"freethrowattempted",@"assists",@"totalrebounds",@"defrebounds",@"offrebounds",@"steals",@"blocks",@"turnovers",@"gamewinner",@"scoringstyle",@"teamsize",@"fullcourt",nil];
     
-    filteredTitelArray=[[NSMutableArray alloc] initWithObjects:@"All",@"Season",@"Pickup",@"Wins",@"Losses",@"Season ID",@"Team Size",@"Full Court",@"Not Full Cort",nil];
+    filteredTitelArray=[[NSMutableArray alloc] initWithObjects:@"All",@"Season",@"Pickup",@"Wins",@"Loses",@"Season ID",@"Team Size",@"Full Court",@"Not Full Court",nil];
     
     filteredKeyArray=[[NSMutableArray alloc] initWithObjects:@"all",@"type,Season",@"type,Pickup",@"win,YES",@"win,NO",@"seasonid,seasonid",@"teamsize,teamsize",@"fullcourt,YES",@"fullcourt,NO",nil];
     cellSelectedArray=[[NSMutableArray alloc] init];
+    seasonIdArray=[[NSMutableArray alloc]init];
     SelectedCellBGColor = [UIColor colorWithRed:0.0f/255.0f green:31.0f/255.0f blue:112.0f/255.0f alpha:1.0f];
     NotSelectedCellBGColor =[UIColor colorWithRed:115.0f/255.0f green:153.0f/255.0f blue:198.0f/255.0f alpha:1.0f];
     leftTableData=[[NSMutableArray alloc] init];
@@ -204,11 +205,24 @@ NSIndexPath *selectedIndexPath;
         NSLog(@"Select Indexpath.row=%ld",(long)indexPath.row);
         int row=(int)indexPath.row;
         rowNumber = [NSNumber numberWithInt:row];
-        if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Team Size"]){
-            [UIView animateWithDuration:0.5  animations:^{
-                self.pickerBGView.alpha=1.0;
-            }];
+        if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Team Size"] ){
+            pickerViewSelection=@"Team Size";
+            [self showPickerView];
+        }else if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Season ID"]){
+            if([seasonIdArray count]>0){
+                pickerViewSelection=@"Season ID";
+                [self showPickerView];
+            }else{
+                [ProgressHUD showError:@"There are no Season Id."];
+            }
+        }else if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Wins"]){
+            pickerViewSelection=@"Wins";
+            [self showPickerView];
+        }else if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Loses"]){
+            pickerViewSelection=@"Loses";
+            [self showPickerView];
         }else{
+            pickerViewSelection=@"";
             [self loadParse:[filteredKeyArray objectAtIndex:indexPath.row]];
         }
 //        if(cellSelectedArray.count==0){
@@ -227,7 +241,12 @@ NSIndexPath *selectedIndexPath;
         isShown = false;
     }
 }
-
+-(void)showPickerView{
+    [UIView animateWithDuration:0.5  animations:^{
+        self.pickerBGView.alpha=1.0;
+    }];
+    [self.teamSizePickerView reloadAllComponents];
+}
 #pragma mark - UITableView Cell Delselection
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView==self.filterTableView){
@@ -247,15 +266,14 @@ NSIndexPath *selectedIndexPath;
             NSString *keyString=[array objectAtIndex:0];
             NSString *valueString=[array objectAtIndex:1];
             if([keyString isEqualToString:@"seasonid"]){
-                [query whereKey:keyString notEqualTo:@""];
+                [query whereKey:keyString equalTo:teamValue];
             }else if([keyString isEqualToString:@"teamsize"]){
                 [query whereKey:keyString equalTo:teamValue];
+            }else if([keyString isEqualToString:@"win"]){
+                [query whereKey:keyString equalTo:valueString];
+                [query whereKey:@"type" equalTo:teamValue];
             }else{
-                if([valueString isEqualToString:@"NO"]){
-                    [query whereKey:keyString notEqualTo:@"YES"];
-                }else{
-                    [query whereKey:keyString equalTo:valueString];
-                }
+               [query whereKey:keyString equalTo:valueString];
             }
             [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
         }
@@ -271,6 +289,11 @@ NSIndexPath *selectedIndexPath;
                      NSLog(@"All Object: %@",yourStats);
                      NSMutableArray *twoL=[[NSMutableArray alloc] init];
                      for (int j=0;j<[yourStats count]; j++) {
+                         if([seasonIdArray count]==0){
+                             if ([[yourStats objectAtIndex:j] objectForKey:@"seasonid"]) {
+                                 [seasonIdArray addObject:[[yourStats objectAtIndex:j] valueForKey:@"seasonid"]];
+                             }
+                         }
                          NSString *dateStr=[self dateToStringConvertion:[[yourStats objectAtIndex:j] valueForKey:@"createdAt"]];
                          [twoL addObject:dateStr];
                      }
@@ -512,6 +535,32 @@ NSIndexPath *selectedIndexPath;
 //    NSLog(@"Your Stats Count: %lu",(unsigned long)yourStats.count);
 //    NSLog(@"Your Stats 1: %@",yourStats[1]);
 }
+
+- (IBAction)btnDonePickerAction:(id)sender {
+
+    [UIView animateWithDuration:0.5  animations:^{
+        self.pickerBGView.alpha=0.0;
+    }];
+    if([pickerViewSelection isEqualToString:@"Team Size"]){
+        teamValue =[NSString stringWithFormat:@"%@",[teamSizeArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+        NSLog(@"%@", teamValue);
+        [self loadParse:@"teamsize,teamsize"];
+    }else if([pickerViewSelection isEqualToString:@"Season ID"]){
+        teamValue =[NSString stringWithFormat:@"%@",[seasonIdArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+        NSLog(@"%@", teamValue);
+        [self loadParse:@"seasonid,seasonid"];
+    }else if([pickerViewSelection isEqualToString:@"Wins"]){
+        teamValue =[NSString stringWithFormat:@"%@",[gameTypeArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+        NSLog(@"%@", teamValue);
+        [self loadParse:@"win,YES"];
+    }else{
+        teamValue =[NSString stringWithFormat:@"%@",[gameTypeArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+        NSLog(@"%@", teamValue);
+        [self loadParse:@"win,NO"];
+    }
+    
+    
+}
 #pragma mark -
 #pragma mark PickerView DataSource
 
@@ -522,23 +571,42 @@ NSIndexPath *selectedIndexPath;
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return teamSizeArray.count;
+    if([pickerViewSelection isEqualToString:@"Team Size"]){
+        return teamSizeArray.count;
+    }else if([pickerViewSelection isEqualToString:@"Season ID"]){
+        return seasonIdArray.count;
+    }else if([pickerViewSelection isEqualToString:@"Wins"]){
+        return gameTypeArray.count;
+    }else if([pickerViewSelection isEqualToString:@"Loses"]){
+        return gameTypeArray.count;
+    }else{
+        return 0;
+    }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return teamSizeArray[row];
+    if([pickerViewSelection isEqualToString:@"Team Size"]){
+        return [teamSizeArray objectAtIndex:row];
+    }else if([pickerViewSelection isEqualToString:@"Season ID"]){
+        return [seasonIdArray objectAtIndex:row];
+    }else if([pickerViewSelection isEqualToString:@"Wins"]){
+        return [gameTypeArray objectAtIndex:row];
+    }else if([pickerViewSelection isEqualToString:@"Loses"]){
+        return [gameTypeArray objectAtIndex:row];
+    }else{
+        return nil;
+    }
 }
 #pragma mark -
 #pragma mark PickerView Delegate
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
       inComponent:(NSInteger)component
 {
-    [UIView animateWithDuration:0.5  animations:^{
-        self.pickerBGView.alpha=0.0;
-    }];
-    teamValue=[NSString stringWithFormat:@"%@",[teamSizeArray objectAtIndex:row]];
-    [self loadParse:@"teamsize,teamsize"];
+   
+//    teamValue=[NSString stringWithFormat:@"%@",[teamSizeArray objectAtIndex:row]];
+   
+   
 }
 
 #pragma mark-

@@ -27,11 +27,9 @@
 
 #import "XCMultiSortTableView.h"
 
-@interface SortableTableViewController : UIViewController
+@interface SortableTableViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate>
 {
     XCMultiTableView *XCMtableView;
-    
-    //Samrat
     UIView *loadingBackground;
     UILabel *loadingText;
     UIActivityIndicatorView *indicator;
@@ -43,11 +41,14 @@
     BOOL isShown;
     NSMutableArray *teamSizeArray;
     NSString *teamValue;
-    //
+    NSMutableArray *seasonIdArray;
+    NSString *pickerViewSelection;
+    NSMutableArray *gameTypeArray;
 }
 @property (strong, nonatomic) IBOutlet UITableView *filterTableView;
 @property (strong, nonatomic) IBOutlet UIPickerView *teamSizePickerView;
 @property (strong, nonatomic) IBOutlet UIView *pickerBGView;
 - (IBAction)filter:(id)sender;
+- (IBAction)btnDonePickerAction:(id)sender;
 
 @end

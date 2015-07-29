@@ -30,6 +30,7 @@ NSIndexPath *selectedIndexPath;
     [self initData];
     rowNumber=[NSNumber numberWithInt:0];
     selectedIndexPath=0;
+    calculationStatus=NO;
     [self loadParse:@"all"];
 }
 
@@ -39,12 +40,13 @@ NSIndexPath *selectedIndexPath;
 
 - (void)initData {
     teamSizeArray=[[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3",@"4",@"5", nil];
+    gameTypeArray=[[NSMutableArray alloc]initWithObjects:@"Season",@"Pickup", nil];
     headData =[[NSMutableArray alloc] initWithObjects:@"yourscore",@"opponentscore",@"twoptmade",@"twoptattempted",@"threeptmade",@"threeptattempted",@"freethrowmade",@"freethrowattempted",@"assists",@"totalrebounds",@"defrebounds",@"offrebounds",@"steals",@"blocks",@"turnovers",@"win",nil];
     
-    filteredTitelArray=[[NSMutableArray alloc] initWithObjects:@"All",@"Season",@"Pickup",@"Wins",@"Losses",@"Season ID",@"Team Size",@"Full Court",@"Not Full Cort",nil];
+    filteredTitelArray=[[NSMutableArray alloc] initWithObjects:@"All",@"Season",@"Pickup",@"Wins",@"Loses",@"Season ID",@"Team Size",@"Full Court",@"Not Full Court",nil];
     
     filteredKeyArray=[[NSMutableArray alloc] initWithObjects:@"all",@"type,Season",@"type,Pickup",@"win,YES",@"win,NO",@"seasonid,seasonid",@"teamsize,teamsize",@"fullcourt,YES",@"fullcourt,NO",nil];
-    
+    seasonIdArray=[[NSMutableArray alloc]init];
     leftTableData=[[NSMutableArray alloc] init];
     rightTableData = [[NSMutableArray alloc] init];
 }
@@ -223,11 +225,24 @@ NSIndexPath *selectedIndexPath;
         NSLog(@"Select Indexpath.row=%ld",(long)indexPath.row);
         int row=(int)indexPath.row;
         rowNumber = [NSNumber numberWithInt:row];
-        if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Team Size"]){
-            [UIView animateWithDuration:0.5  animations:^{
-                self.pickerBGView.alpha=1.0;
-            }];
+        if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Team Size"] ){
+            pickerViewSelection=@"Team Size";
+            [self showPickerView];
+        }else if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Season ID"]){
+            if([seasonIdArray count]>0){
+                pickerViewSelection=@"Season ID";
+                [self showPickerView];
+            }else{
+                 [ProgressHUD showError:@"There are no Season Id."];
+            }
+        }else if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Wins"]){
+            pickerViewSelection=@"Wins";
+            [self showPickerView];
+        }else if([[filteredTitelArray objectAtIndex:indexPath.row] isEqualToString:@"Loses"]){
+            pickerViewSelection=@"Loses";
+            [self showPickerView];
         }else{
+            pickerViewSelection=@"";
             [self loadParse:[filteredKeyArray objectAtIndex:indexPath.row]];
         }
         
@@ -236,9 +251,13 @@ NSIndexPath *selectedIndexPath;
         }];
         isShown = false;
     }
-    
 }
-
+-(void)showPickerView{
+    [UIView animateWithDuration:0.5  animations:^{
+        self.pickerBGView.alpha=1.0;
+    }];
+    [self.teamSizePickerView reloadAllComponents];
+}
 #pragma mark - UITableView Cell Delselection
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView==self.filterTableView){
@@ -259,15 +278,14 @@ NSIndexPath *selectedIndexPath;
             NSString *keyString=[array objectAtIndex:0];
             NSString *valueString=[array objectAtIndex:1];
             if([keyString isEqualToString:@"seasonid"]){
-                [query whereKey:keyString notEqualTo:@""];
+                [query whereKey:keyString equalTo:teamValue];
             }else if([keyString isEqualToString:@"teamsize"]){
                 [query whereKey:keyString equalTo:teamValue];
+            }else if([keyString isEqualToString:@"win"]){
+                [query whereKey:keyString equalTo:valueString];
+                [query whereKey:@"type" equalTo:teamValue];
             }else{
-                if([valueString isEqualToString:@"NO"]){
-                    [query whereKey:keyString notEqualTo:@"YES"];
-                }else{
-                    [query whereKey:keyString equalTo:valueString];
-                }
+                [query whereKey:keyString equalTo:valueString];
             }
             [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
 //            [query whereKey:@"user"
@@ -282,21 +300,30 @@ NSIndexPath *selectedIndexPath;
                  if([objects count]>0){
                      [yourStats removeAllObjects];
                      [yourStats addObjectsFromArray:objects];
-                     
+                    
                      NSMutableArray *leftTableDataCount=[[NSMutableArray alloc]init];
                      NSLog(@"All Object: %@",yourStats);
                      NSMutableArray *twoL=[[NSMutableArray alloc] init];
                      NSMutableArray *twoLL=[[NSMutableArray alloc] init];
                      
                      for (int j=0;j<[yourStats count]; j++) {
+                         if([seasonIdArray count]==0){
+                             if ([[yourStats objectAtIndex:j] objectForKey:@"seasonid"]) {
+                                 [seasonIdArray addObject:[[yourStats objectAtIndex:j] valueForKey:@"seasonid"]];
+                             }
+                         }
+                         
                          NSString *dateStr=[self dateToStringConvertion:[[yourStats objectAtIndex:j] valueForKey:@"createdAt"]];
                          [twoL addObject:dateStr];
                      }
+                      NSLog(@"seasonIdArray = %@",seasonIdArray);
                      [leftTableData removeAllObjects];
                      NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:twoL];
                      [twoLL addObjectsFromArray:[orderedSet array]];
                      [leftTableData addObject:twoLL];
                      NSLog(@"leftTableData = %@",leftTableData);
+                     
+                     
                      
                      for(int i=0;i< [twoL count]; i++){
                          NSCountedSet *countedSet = [[NSCountedSet alloc] initWithArray:twoL];
@@ -308,6 +335,7 @@ NSIndexPath *selectedIndexPath;
                      NSLog(@"leftTableDataCount = %@",leftTableDataCount);
                      NSMutableArray *twoR=[[NSMutableArray alloc] init];
                      for (int m=0;m< [headData count]; m++) {
+                         
                          NSMutableArray *tempYValueArray=[[NSMutableArray alloc]init];
                          for (int j=0;j<[yourStats count]; j++) {
                              if([[headData objectAtIndex:m] isEqualToString:@"win"]){
@@ -319,13 +347,14 @@ NSIndexPath *selectedIndexPath;
                                          [tempYValueArray addObject:@"0"];
                                      }
                                  }else{
-                                     [tempYValueArray addObject:@"0"];
+                                     [tempYValueArray addObject:@"NA"];
                                  }
                              }else{
                                  if ([[yourStats objectAtIndex:j] objectForKey:[headData objectAtIndex:m]]) {
+                                     
                                      [tempYValueArray addObject:[NSString stringWithFormat:@"%@",[[yourStats objectAtIndex:j] valueForKey:[headData objectAtIndex:m]]]];
                                  }else{
-                                     [tempYValueArray addObject:@"0"];
+                                     [tempYValueArray addObject:@"NA"];
                                  }
                              }
                          }
@@ -336,22 +365,43 @@ NSIndexPath *selectedIndexPath;
                              if([[headData objectAtIndex:m] isEqualToString:@"win"]){
                                  int sumValue=0;
                                  for (int j=0; j< [[leftTableDataCount objectAtIndex:i] intValue]; j++) {
-                                     sumValue=sumValue+[[tempYValueArray objectAtIndex:arrayCount] intValue];
+                                     if([[tempYValueArray objectAtIndex:arrayCount] isEqualToString:@"NA"]){
+                                         //nothing
+                                     }else{
+                                         sumValue=sumValue+[[tempYValueArray objectAtIndex:arrayCount] intValue];
+                                     }
+                                    
+                                     
                                      arrayCount++;
+                                     
                                  }
                                  [arr addObject:[NSString stringWithFormat:@"%d",sumValue]];
                              }else{
                                  int sumValue=0;
+                                 int undefinedCount=0;
                                  for (int j=0; j< [[leftTableDataCount objectAtIndex:i] intValue]; j++) {
-                                     sumValue=sumValue+[[tempYValueArray objectAtIndex:arrayCount] intValue];
+                                     if([[tempYValueArray objectAtIndex:arrayCount] isEqualToString:@"NA"]){
+                                         undefinedCount++;
+                                     }else{
+                                         sumValue=sumValue+[[tempYValueArray objectAtIndex:arrayCount] intValue];
+                                     }
+                                     
+                                     
                                      arrayCount++;
                                  }
-                                 [arr addObject:[NSString stringWithFormat:@"%d",(sumValue/[[leftTableDataCount objectAtIndex:i] intValue])]];
+                                 if(calculationStatus){
+                                     [arr addObject:[NSString stringWithFormat:@"%d",sumValue]];
+                                 }else{
+                                     NSLog(@" average value= %.2f",(sumValue/([[leftTableDataCount objectAtIndex:i] floatValue]-undefinedCount)));
+                                     
+                                     NSLog(@"undefinedCount= %d",undefinedCount);
+                                     if(([[leftTableDataCount objectAtIndex:i] floatValue]-undefinedCount)==0){
+                                         [arr addObject:[NSString stringWithFormat:@"0.00"]];
+                                     }else{
+                                          [arr addObject:[NSString stringWithFormat:@"%.2f",(sumValue/([[leftTableDataCount objectAtIndex:i] floatValue]-undefinedCount))]];
+                                     }
+                                 }
                              }
-                             
-                             
-                             
-                            
                          }
                          NSLog(@"arr = %@",arr);
                          [twoR addObject:arr];
@@ -375,7 +425,6 @@ NSIndexPath *selectedIndexPath;
                      NSLog(@"right array=%@",rightTableData);
                      [self RemoveLoadingView];
                  }else{
-                     
                      [ProgressHUD showError:@"No Stats To Show"];
                      [self RemoveLoadingView];
                  }
@@ -455,22 +504,78 @@ NSIndexPath *selectedIndexPath;
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return teamSizeArray.count;
+    if([pickerViewSelection isEqualToString:@"Team Size"]){
+        return teamSizeArray.count;
+    }else if([pickerViewSelection isEqualToString:@"Season ID"]){
+        return seasonIdArray.count;
+    }else if([pickerViewSelection isEqualToString:@"Wins"]){
+        return gameTypeArray.count;
+    }else if([pickerViewSelection isEqualToString:@"Loses"]){
+        return gameTypeArray.count;
+    }else{
+        return 0;
+    }
+    
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return teamSizeArray[row];
+    if([pickerViewSelection isEqualToString:@"Team Size"]){
+         return [teamSizeArray objectAtIndex:row];
+    }else if([pickerViewSelection isEqualToString:@"Season ID"]){
+         return [seasonIdArray objectAtIndex:row];
+    }else if([pickerViewSelection isEqualToString:@"Wins"]){
+        return [gameTypeArray objectAtIndex:row];
+    }else if([pickerViewSelection isEqualToString:@"Loses"]){
+        return [gameTypeArray objectAtIndex:row];
+    }else{
+        return nil;
+    }
+   
 }
 #pragma mark -
 #pragma mark PickerView Delegate
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
       inComponent:(NSInteger)component
 {
+
+}
+- (IBAction)btnDonePickerViewAction:(id)sender {
     [UIView animateWithDuration:0.5  animations:^{
         self.pickerBGView.alpha=0.0;
     }];
-    teamValue=[NSString stringWithFormat:@"%@",[teamSizeArray objectAtIndex:row]];
-     [self loadParse:@"teamsize,teamsize"];
+    if([pickerViewSelection isEqualToString:@"Team Size"]){
+        teamValue =[NSString stringWithFormat:@"%@",[teamSizeArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+         NSLog(@"%@", teamValue);
+        [self loadParse:@"teamsize,teamsize"];
+    }else if([pickerViewSelection isEqualToString:@"Season ID"]){
+        teamValue =[NSString stringWithFormat:@"%@",[seasonIdArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+         NSLog(@"%@", teamValue);
+        [self loadParse:@"seasonid,seasonid"];
+    }else if([pickerViewSelection isEqualToString:@"Wins"]){
+        teamValue =[NSString stringWithFormat:@"%@",[gameTypeArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+        NSLog(@"%@", teamValue);
+        [self loadParse:@"win,YES"];
+    }else{
+        teamValue =[NSString stringWithFormat:@"%@",[gameTypeArray objectAtIndex:[self.teamSizePickerView selectedRowInComponent:0]]];
+        NSLog(@"%@", teamValue);
+        [self loadParse:@"win,NO"];
+    }
+
+}
+- (IBAction)btnToggleTotalAndAvarageAction:(id)sender{
+    calculationStatus=!calculationStatus;
+    if(calculationStatus){
+        [self.btnToggleTotalAndAverage setTitle:@"Monthly Total"];
+    }else{
+        [self.btnToggleTotalAndAverage setTitle:@"Monthly Average"];
+    }
+    rowNumber=[NSNumber numberWithInt:0];
+    selectedIndexPath=0;
+    [self loadParse:@"all"];
+    
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+    [self.filterTableView selectRowAtIndexPath:indexPath animated:YES  scrollPosition:UITableViewScrollPositionBottom];
+    
 }
 @end
