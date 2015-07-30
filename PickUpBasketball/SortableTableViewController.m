@@ -287,13 +287,23 @@ NSIndexPath *selectedIndexPath;
                      [yourStats removeAllObjects];
                      [yourStats addObjectsFromArray:objects];
                      NSLog(@"All Object: %@",yourStats);
-                     NSMutableArray *twoL=[[NSMutableArray alloc] init];
-                     for (int j=0;j<[yourStats count]; j++) {
-                         if([seasonIdArray count]==0){
+                     if([seasonIdArray count]==0){
+                         for (int j=0;j<[yourStats count]; j++) {
                              if ([[yourStats objectAtIndex:j] objectForKey:@"seasonid"]) {
-                                 [seasonIdArray addObject:[[yourStats objectAtIndex:j] valueForKey:@"seasonid"]];
+                                 NSString*seasionStr=[NSString stringWithFormat:@"%@",[[yourStats objectAtIndex:j] objectForKey:@"seasonid"]];
+                                 if(seasionStr.length>0){
+                                     [seasonIdArray addObject:[[yourStats objectAtIndex:j] valueForKey:@"seasonid"]];
+                                 }
                              }
                          }
+                         NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:seasonIdArray];
+                         [seasonIdArray removeAllObjects];
+                         [seasonIdArray addObjectsFromArray:[orderedSet array]];
+                     }
+                     NSLog(@"seasonIdArray = %@",seasonIdArray);
+                     
+                     NSMutableArray *twoL=[[NSMutableArray alloc] init];
+                     for (int j=0;j<[yourStats count]; j++) {
                          NSString *dateStr=[self dateToStringConvertion:[[yourStats objectAtIndex:j] valueForKey:@"createdAt"]];
                          [twoL addObject:dateStr];
                      }

@@ -60,6 +60,8 @@ NSIndexPath *selectedIndexPath;
         PFQuery *query = [PFQuery queryWithClassName:PF_GAME_CLASS_NAME];
         if([keyType isEqualToString:@"all"]){
             [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
+//            [query whereKey:@"user"
+//                    equalTo:[PFObject objectWithoutDataWithClassName:PF_USER_CLASS_NAME objectId:@"4hmtjrWSeA"]];
         }else{
             NSArray* array = [keyType componentsSeparatedByString: @","];
             NSString *keyString=[array objectAtIndex:0];
@@ -75,8 +77,8 @@ NSIndexPath *selectedIndexPath;
                 [query whereKey:keyString equalTo:valueString];
             }
             [query whereKey:PF_GAME_USER equalTo:[PFUser currentUser]];
-            //            [query whereKey:@"user"
-            //                    equalTo:[PFObject objectWithoutDataWithClassName:PF_USER_CLASS_NAME objectId:@"4hmtjrWSeA"]];
+//                        [query whereKey:@"user"
+//                                equalTo:[PFObject objectWithoutDataWithClassName:PF_USER_CLASS_NAME objectId:@"4hmtjrWSeA"]];
         }
         [query orderByDescending:@"createdAt"];
         [query setLimit:1000];
@@ -88,7 +90,21 @@ NSIndexPath *selectedIndexPath;
                       [avarageArray removeAllObjects];
                       [yourStats addObjectsFromArray:objects];
                       NSLog(@"All Object: %@",yourStats);
+                       if([seasonIdArray count]==0){
+                           for (int j=0;j<[yourStats count]; j++) {
+                               if ([[yourStats objectAtIndex:j] objectForKey:@"seasonid"]) {
+                                   NSString*seasionStr=[NSString stringWithFormat:@"%@",[[yourStats objectAtIndex:j] objectForKey:@"seasonid"]];
+                                   if(seasionStr.length>0){
+                                       [seasonIdArray addObject:[[yourStats objectAtIndex:j] valueForKey:@"seasonid"]];
+                                   }
+                               }
+                           }
+                           NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:seasonIdArray];
+                           [seasonIdArray removeAllObjects];
+                           [seasonIdArray addObjectsFromArray:[orderedSet array]];
+                      }
                       for(int i=0;i<[headData count];i++){
+                         
                           if([[headData objectAtIndex:i] isEqualToString:@"pickupgame"]){
                               int sumValue=0;
                               int losesCount=0;
@@ -111,11 +127,6 @@ NSIndexPath *selectedIndexPath;
                               int sumValue=0;
                               int losesCount=0;
                               for (int j=0;j<[yourStats count]; j++) {
-                                  if([seasonIdArray count]==0){
-                                      if ([[yourStats objectAtIndex:j] objectForKey:@"seasonid"]) {
-                                          [seasonIdArray addObject:[[yourStats objectAtIndex:j] valueForKey:@"seasonid"]];
-                                      }
-                                  }
                                   if ([[[yourStats objectAtIndex:j] objectForKey:@"type"] isEqualToString:@"Season"]) {
                                       if([[[yourStats objectAtIndex:j] objectForKey:@"win"] isEqualToString:@"YES"]){
                                           sumValue = sumValue + 1;
